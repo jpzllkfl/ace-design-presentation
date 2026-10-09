@@ -26,18 +26,18 @@ Default is **Big Sky + Heartland Steel**. To feature any two:
 ## Live designs
 Every design slide in both decks has an **Open live ↗** link (in the HTML deck, **W** does the same), and the five thumbnails on the "Five directions" slide are links too.
 
-The links open the hosted copy, so they work wherever the deck is opened, as long as there's internet:
-- All five: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/designs/index.html
-- Big Sky: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/designs/bigsky.html
-- Piney Woods: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/designs/piney.html
-- Open Water: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/designs/openwater.html
-- Heartland Steel: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/designs/heartland.html
-- Hill Country: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/designs/hill.html
-- HTML deck: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/deck/index.html
+The links open the GitHub Pages copy, so they work wherever the deck is opened, as long as there's internet:
+- All five: https://jpzllkfl.github.io/ace-design-presentation/designs/index.html
+- Big Sky: https://jpzllkfl.github.io/ace-design-presentation/designs/bigsky.html
+- Piney Woods: https://jpzllkfl.github.io/ace-design-presentation/designs/piney.html
+- Open Water: https://jpzllkfl.github.io/ace-design-presentation/designs/openwater.html
+- Heartland Steel: https://jpzllkfl.github.io/ace-design-presentation/designs/heartland.html
+- Hill Country: https://jpzllkfl.github.io/ace-design-presentation/designs/hill.html
+- HTML deck: https://jpzllkfl.github.io/ace-design-presentation/deck/index.html
 
 In PowerPoint, links only respond in **Slide Show** mode (or Ctrl/Cmd-click while editing).
 
-To use GitHub Pages instead, enable it in the repo settings and change `LIVE_BASE` in `deck/index.html` and `pptx/build-pptx.js`.
+The site is served by GitHub Pages from `main` (Settings → Pages). If the address ever changes, update `LIVE_BASE` in `deck/index.html` and `pptx/build-pptx.js`, then rebuild the .pptx.
 
 ## Files
 - `ACE-Design-Review.pptx`: the PowerPoint version (featured pair: Big Sky + Heartland Steel)
