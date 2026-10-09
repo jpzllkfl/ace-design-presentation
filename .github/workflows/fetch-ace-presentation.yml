@@ -12,11 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download self-contained HTML
+        env:
+          SOURCE_URL: https://litter.catbox.moe/t5nx3r.html
         run: |
           set -euo pipefail
-          URL="${{ secrets.ACE_PRESENTATION_SOURCE_URL || 'https://litter.catbox.moe/t5nx3r.html' }}"
-          echo "Fetching $URL"
-          curl -fsSL "$URL" -o ACE-Presentation.html
+          echo "Fetching $SOURCE_URL"
+          curl -fsSL "$SOURCE_URL" -o ACE-Presentation.html
           python3 - <<'PY'
           from pathlib import Path
           p = Path('ACE-Presentation.html')
