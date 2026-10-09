@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div class="rrw" style="{{ rootStyle }}">
+  <div class="rrw-stepper" role="list" aria-label="Booking steps">
+    <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+      <div class="{{ st.className }}" role="listitem" aria-current="{{ st.current }}">
+        <em>{{ st.mark }}</em>
+        <span>{{ st.label }}</span>
+      </div>
+      <div class="rrw-hair" aria-hidden="true"></div>
+    </sc-for>
+  </div>
+  <div class="rrw-progress" aria-hidden="true"><span style="{{ progressStyle }}"></span></div>
+
+  <sc-if value="{{ showStep1 }}" hint-placeholder-val="{{ true }}">
+    <div class="rrw-pane">
+      <h3 class="rrw-title">What belongs on the book?</h3>
+      <p class="rrw-help">One service. We’ll confirm the rest by phone.</p>
+      <div class="rrw-services" role="group" aria-label="Services">
+        <sc-for list="{{ services }}" as="sv" hint-placeholder-count="4">
+          <button type="button" class="{{ sv.className }}" onClick="{{ sv.onClick }}" aria-pressed="{{ sv.pressed }}">
+            <span class="rrw-box" aria-hidden="true"></span>
+            <span>
+              <em>{{ sv.idx }}</em>
+              <strong>{{ sv.title }}</strong>
+              <small>{{ sv.blurb }}</small>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showStep2 }}" hint-placeholder-val="{{ false }}">
+    <div class="rrw-pane rrw-when">
+      <div>
+        <div class="rrw-month">
+          <h3>{{ monthLabel }}</h3>
+          <div class="rrw-nav">
+            <button type="button" class="{{ prevBtnClass }}" onClick="{{ prevMonth }}" aria-label="Previous month">‹</button>
+            <button type="button" onClick="{{ nextMonth }}" aria-label="Next month">›</button>
+          </div>
+        </div>
+        <div class="rrw-dows" aria-hidden="true">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class="rrw-days">
+          <sc-for list="{{ weeks }}" as="week" hint-placeholder-count="5">
+            <div class="rrw-week">
+              <sc-for list="{{ week }}" as="cell">
+                <button type="button" class="{{ cell.className }}" onClick="{{ cell.onClick }}" aria-label="{{ cell.aria }}" aria-pressed="{{ cell.pressed }}" tabindex="{{ cell.tab }}">{{ cell.label }}</button>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <p class="rrw-note">Closed Sundays. Same-day is not guaranteed.</p>
+      </div>
+      <div>
+        <h3 class="rrw-title">A window</h3>
+        <p class="rrw-help">Central time. We’ll lock the exact hour when we call.</p>
+        <div class="rrw-slots" role="group" aria-label="Available times">
+          <sc-for list="{{ slots }}" as="sl" hint-placeholder-count="6">
+            <button type="button" class="{{ sl.className }}" onClick="{{ sl.onClick }}" aria-pressed="{{ sl.pressed }}">{{ sl.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showStep3 }}" hint-placeholder-val="{{ false }}">
+    <div class="rrw-pane">
+      <h3 class="rrw-title">Who should we call?</h3>
+      <p class="rrw-help">You’ll reach the family — not a call center.</p>
+      <div class="rrw-fields">
+        <div class="rrw-field">
+          <label for="rrw-name">Full name *</label>
+          <input id="rrw-name" name="name" autocomplete="name" value="{{ nameField.value }}" onChange="{{ nameField.onChange }}" placeholder="Jane Doe" class="{{ nameField.className }}" aria-invalid="{{ nameField.invalid }}" aria-describedby="rrw-name-err" />
+          <span id="rrw-name-err" class="rrw-err" role="status">{{ nameField.error }}</span>
+        </div>
+        <div class="rrw-field">
+          <label for="rrw-company">Company</label>
+          <input id="rrw-company" name="company" autocomplete="organization" value="{{ companyField.value }}" onChange="{{ companyField.onChange }}" placeholder="Ranch, fleet, or shop" class="{{ companyField.className }}" />
+          <span class="rrw-err" aria-hidden="true">{{ companyField.error }}</span>
+        </div>
+        <div class="rrw-field">
+          <label for="rrw-email">Email *</label>
+          <input id="rrw-email" name="email" type="email" autocomplete="email" value="{{ emailField.value }}" onChange="{{ emailField.onChange }}" placeholder="you@outfit.com" class="{{ emailField.className }}" aria-invalid="{{ emailField.invalid }}" aria-describedby="rrw-email-err" />
+          <span id="rrw-email-err" class="rrw-err" role="status">{{ emailField.error }}</span>
+        </div>
+        <div class="rrw-field">
+          <label for="rrw-phone">Phone *</label>
+          <input id="rrw-phone" name="phone" type="tel" autocomplete="tel" value="{{ phoneField.value }}" onChange="{{ phoneField.onChange }}" placeholder="(830) 555-0142" class="{{ phoneField.className }}" aria-invalid="{{ phoneField.invalid }}" aria-describedby="rrw-phone-err" />
+          <span id="rrw-phone-err" class="rrw-err" role="status">{{ phoneField.error }}</span>
+        </div>
+        <div class="rrw-field is-wide">
+          <label for="rrw-notes">What do you need?</label>
+          <textarea id="rrw-notes" name="notes" value="{{ notesField.value }}" onChange="{{ notesField.onChange }}" placeholder="Product, quantity, gate or yard, anything we should know…" class="{{ notesField.className }}"></textarea>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showConfirm }}" hint-placeholder-val="{{ false }}">
+    <div class="rrw-pane rrw-done" role="status">
+      <div class="rrw-seal" aria-hidden="true">✓</div>
+      <h3>We’ll see you at the gate.</h3>
+      <p>Request received. We’ll confirm within one business day — never on a Sunday.</p>
+      <div class="rrw-summary">
+        <div class="rrw-sum"><span>Service</span><b>{{ confirm.serviceTitle }}</b></div>
+        <div class="rrw-sum"><span>Date</span><b>{{ confirm.dateLabel }}</b></div>
+        <div class="rrw-sum"><span>Window</span><b>{{ confirm.slot }}</b></div>
+        <div class="rrw-sum"><span>Contact</span><b>{{ confirm.name }} · {{ confirm.phone }}</b></div>
+      </div>
+      <button type="button" class="rrw-again" onClick="{{ bookAnother }}">Book another</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+    <div class="rrw-foot">
+      <button type="button" class="{{ backClass }}" onClick="{{ back }}">Back</button>
+      <button type="button" class="{{ nextClass }}" onClick="{{ next }}">{{ nextLabel }}</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    step: 0, service: null, viewYear: null, viewMonth: null,
+    date: null, slot: null, submitted: false,
+    form: { name:'', company:'', email:'', phone:'', notes:'' }, errors: {},
+  };
+
+  services = [
+    { id:'blending',   idx:'01', title:'Custom oil blending',        blurb:'Engine, hydraulic, and gear oils mixed for your iron and this country’s heat.' },
+    { id:'sales',      idx:'02', title:'Bulk & packaged sales',      blurb:'Oils, fluids, greases, DEF — a tote for the yard or a pail for the shop.' },
+    { id:'delivery',   idx:'03', title:'Fleet & gate delivery',      blurb:'Scheduled or on-demand. Pleasanton to your latch, without a dispatcher in between.' },
+    { id:'consulting', idx:'04', title:'Lubrication consulting',     blurb:'Oil analysis and straight advice. We’d rather save a teardown than sell a drum.' },
+  ];
+  slots = ['7:30 AM','9:00 AM','10:30 AM','1:00 PM','2:30 PM','4:00 PM'];
+
+  componentDidMount() {
+    const now = new Date();
+    this.setState({ viewYear: now.getFullYear(), viewMonth: now.getMonth() });
+  }
+
+  validate() {
+    const f = this.state.form; const e = {};
+    if (!f.name.trim()) e.name = 'Please enter your name';
+    if (!/^\S+@\S+\.\S+$/.test(f.email)) e.email = 'Enter a valid email';
+    if (f.phone.replace(/\D/g,'').length < 7) e.phone = 'Enter a phone number';
+    return e;
+  }
+  next() {
+    const s = this.state;
+    if (s.step === 0) { if (s.service) this.setState({ step: 1 }); return; }
+    if (s.step === 1) { if (s.date && s.slot) this.setState({ step: 2 }); return; }
+    if (s.step === 2) { const e = this.validate(); if (Object.keys(e).length) { this.setState({ errors: e }); return; } this.setState({ submitted: true }); }
+  }
+  buildCells() {
+    const s = this.state; if (s.viewYear == null) return [];
+    const y = s.viewYear, m = s.viewMonth;
+    const startDow = new Date(y, m, 1).getDay();
+    const dim = new Date(y, m + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const raw = [];
+    for (let i = 0; i < startDow; i++) raw.push(null);
+    for (let d = 1; d <= dim; d++) {
+      const dt = new Date(y, m, d);
+      const iso = y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+      const sunday = dt.getDay() === 0, past = dt < today;
+      raw.push({ d, iso, dt, disabled: sunday || past, sunday, past, selected: s.date === iso, today: dt.getTime() === today.getTime() });
+    }
+    while (raw.length % 7) raw.push(null);
+    const cells = raw.map((c, i) => {
+      if (!c) return { key:'e'+i, label:'', className:'rrw-day is-empty', aria:'', pressed:'false', tab:'-1' };
+      const cls = ['rrw-day'];
+      if (c.disabled) cls.push('is-disabled');
+      if (c.sunday) cls.push('is-sunday');
+      if (c.today) cls.push('is-today');
+      if (c.selected) cls.push('is-selected');
+      const long = c.dt.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+      let aria = long;
+      if (c.sunday) aria += ', closed Sundays';
+      else if (c.past) aria += ', unavailable';
+      else if (c.selected) aria += ', selected';
+      return {
+        key: c.iso, label: String(c.d), className: cls.join(' '),
+        aria, pressed: c.selected ? 'true' : 'false',
+        tab: c.disabled ? '-1' : '0',
+        onClick: c.disabled ? undefined : () => this.setState({ date: c.iso }),
+      };
+    });
+    const weeks = []; for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+    return weeks;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const rootStyle = {};
+
+    const services = this.services.map(sv => ({
+      id: sv.id, idx: sv.idx, title: sv.title, blurb: sv.blurb,
+      onClick: () => this.setState({ service: sv.id }),
+      className: 'rrw-svc' + (s.service === sv.id ? ' is-on' : ''),
+      pressed: s.service === sv.id ? 'true' : 'false',
+    }));
+
+    const stepDefs = [{ n:1, label:'Service' }, { n:2, label:'Date' }, { n:3, label:'Details' }];
+    const steps = stepDefs.map((sd, i) => {
+      const status = s.submitted ? 'done' : (i < s.step ? 'done' : (i === s.step ? 'active' : 'todo'));
+      return {
+        n: sd.n, label: sd.label,
+        mark: status === 'done' ? '0' + sd.n : '0' + sd.n,
+        className: 'rrw-step is-' + status,
+        current: status === 'active' ? 'step' : undefined,
+      };
+    });
+
+    const weeks = this.buildCells();
+    const monthLabel = s.viewYear == null ? '' : new Date(s.viewYear, s.viewMonth, 1).toLocaleDateString('en-US', { month:'long', year:'numeric' });
+    const now = new Date();
+    const canPrev = s.viewYear != null && !(s.viewYear === now.getFullYear() && s.viewMonth <= now.getMonth());
+    const prevMonth = () => { if (!canPrev) return; this.setState(st => { let m = st.viewMonth - 1, y = st.viewYear; if (m < 0) { m = 11; y--; } return { viewMonth:m, viewYear:y }; }); };
+    const nextMonth = () => this.setState(st => { let m = st.viewMonth + 1, y = st.viewYear; if (m > 11) { m = 0; y++; } return { viewMonth:m, viewYear:y }; });
+
+    const slots = this.slots.map(t => ({
+      label: t, onClick: () => this.setState({ slot: t }),
+      className: 'rrw-slot' + (s.slot === t ? ' is-on' : ''),
+      pressed: s.slot === t ? 'true' : 'false',
+    }));
+
+    const f = s.form, er = s.errors;
+    const field = (k) => ({
+      value: f[k], error: er[k] || '',
+      invalid: er[k] ? 'true' : 'false',
+      className: er[k] ? 'is-bad' : '',
+      onChange: (e) => { const v = e.target.value; this.setState(st => ({ form: Object.assign({}, st.form, { [k]: v }), errors: Object.assign({}, st.errors, { [k]: undefined }) })); },
+    });
+
+    const canNext = s.step === 0 ? !!s.service : (s.step === 1 ? (!!s.date && !!s.slot) : true);
+    const nextLabel = s.step === 2 ? 'Confirm booking' : 'Continue';
+    const progressPct = s.submitted ? '100%' : ((s.step + 1) / 3 * 100) + '%';
+
+    const svc = this.services.find(x => x.id === s.service);
+    const dateLabel = s.date ? new Date(s.date + 'T00:00:00').toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' }) : '';
+
+    return {
+      rootStyle, steps, services, weeks, slots, monthLabel, prevMonth, nextMonth,
+      nameField: field('name'), companyField: field('company'), emailField: field('email'), phoneField: field('phone'), notesField: field('notes'),
+      next: () => this.next(), back: () => { if (s.step === 0) return; this.setState(st => ({ step: Math.max(0, st.step - 1) })); },
+      bookAnother: () => this.setState({ step:0, service:null, date:null, slot:null, submitted:false, form:{ name:'', company:'', email:'', phone:'', notes:'' }, errors:{} }),
+      nextLabel,
+      prevBtnClass: canPrev ? '' : 'is-off',
+      backClass: 'rrw-back' + (s.step === 0 ? ' is-off' : ''),
+      nextClass: 'rrw-next' + (canNext ? '' : ' is-off'),
+      progressStyle: { width: progressPct },
+      showStep1: !s.submitted && s.step === 0, showStep2: !s.submitted && s.step === 1, showStep3: !s.submitted && s.step === 2,
+      showConfirm: s.submitted, showNav: !s.submitted,
+      confirm: { serviceTitle: svc ? svc.title : '', dateLabel, slot: s.slot, name: f.name, phone: f.phone },
+    };
+  }
+}
+</script>
+</body>
+</html>

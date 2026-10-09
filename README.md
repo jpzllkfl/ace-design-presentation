@@ -43,7 +43,7 @@ The site is served by GitHub Pages from `main` (Settings → Pages). If the addr
 - `ACE-Design-Review.pptx`: the PowerPoint version (featured pair: Big Sky + Heartland Steel)
 - `pptx/build-pptx.js`: rebuilds the .pptx (`npm i pptxgenjs@3 && node pptx/build-pptx.js`); change `FEATURED` there to swap the pair
 - `deck/index.html`: the deck
-- `designs/`: the five concepts (`five-concepts.html`), booking wizard, Round 2 concepts, and per-design short links. Copied from `jpzllkfl/ACE` `design_handoff_ashercrest_website/`; React is bundled in `designs/vendor/` so it doesn't depend on a CDN
+- `designs/`: the five concepts (`five-concepts.html`), booking wizard, Round 2 concepts, and per-design short links. Five concepts, `BookingWizard.dc.html` (the themed scheduling matrix) and `polish.css` come from `jpzllkfl/ACE` branch `cursor/modern-push-wizard-imagery-b570`; Round 2 and `RanchRoadWizard.dc.html` from its `main`. Keep the `*.dc.html` component names: the pages load them by name. React is bundled in `designs/vendor/` so it doesn't depend on a CDN
 - `deck/SPEAKER-NOTES.md`: talk track and why this pair
 - `deck/assets/`: gold/light ACE logo (transparent), five hero shots, five themed booking matrices
 - `archive/ACE-Presentation-draft.html`: the earlier draft, kept for reference only
