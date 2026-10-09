@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ACE Live Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root { --night: #15110b; --cream: #f5efe3; --gold: #d6a64a; --soft: rgba(245,239,227,.62); --line: rgba(245,239,227,.12); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--cream); font-family: 'Outfit', system-ui, sans-serif;
+    background: radial-gradient(1100px 600px at 90% -10%, rgba(214,166,74,.16), transparent 60%), linear-gradient(165deg, #211a10, var(--night) 60%);
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 1240px; margin: 0 auto; padding: 48px 16px 72px; }
+  @media (min-width: 720px) { main { padding: 64px 40px 96px; } }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  header img { height: 34px; width: auto; }
+  header a { font: 500 12px/1 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+  .kicker { font: 500 12px/1 'JetBrains Mono', monospace; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 56px 0 14px; }
+  h1 { font: 600 clamp(36px, 6vw, 64px)/1.02 'Fraunces', Georgia, serif; letter-spacing: -.02em; margin: 0; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .lede { color: var(--soft); font-size: 18px; line-height: 1.5; max-width: 52ch; margin: 18px 0 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 28px; margin-top: 44px; }
+  .card { display: block; color: inherit; text-decoration: none; }
+  .card .shot { border-radius: 12px; overflow: hidden; aspect-ratio: 1100/644; background: #222; box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06); transition: transform .25s ease, box-shadow .25s ease; }
+  .card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card:hover .shot, .card:focus-visible .shot { transform: translateY(-4px); box-shadow: 0 0 0 2px var(--gold), 0 30px 60px -30px rgba(0,0,0,.7); }
+  .card .n { font: 500 12px/1 'JetBrains Mono', monospace; letter-spacing: .14em; color: var(--gold); margin-top: 18px; display: block; }
+  .card .t { display: block; font: 600 26px/1.15 'Fraunces', Georgia, serif; margin-top: 8px; }
+  .card .f { display: block; color: var(--soft); font-size: 16px; margin-top: 4px; }
+  .more { margin-top: 64px; border-top: 1px solid var(--line); padding-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .more a { color: var(--cream); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 12px 20px; font-size: 15px; }
+  .more a:hover { border-color: var(--gold); }
+  .note { color: var(--soft); font-size: 14px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="../deck/assets/ace-logo-gold.png" alt="A.C.E. Distribution" />
+    <a href="../deck/index.html">← Back to the deck</a>
+  </header>
+  <p class="kicker">Live designs</p>
+  <h1>The five directions, <em>full page.</em></h1>
+  <p class="lede">Open any one and scroll it top to bottom. The tabs at the top switch between all five.</p>
+
+  <div class="grid">
+    <a class="card" href="bigsky.html"><div class="shot"><img src="../deck/assets/hero_bigsky.jpg" alt="" /></div><span class="n">01</span><span class="t">Big Sky</span><span class="f">Warm, editorial, timeless.</span></a>
+    <a class="card" href="piney.html"><div class="shot"><img src="../deck/assets/hero_piney.jpg" alt="" /></div><span class="n">02</span><span class="t">Piney Woods</span><span class="f">Rooted, calm, organic.</span></a>
+    <a class="card" href="openwater.html"><div class="shot"><img src="../deck/assets/hero_openwater.jpg" alt="" /></div><span class="n">03</span><span class="t">Open Water</span><span class="f">Crisp, corporate, confident.</span></a>
+    <a class="card" href="heartland.html"><div class="shot"><img src="../deck/assets/hero_heartland.jpg" alt="" /></div><span class="n">04</span><span class="t">Heartland Steel</span><span class="f">Bold, cinematic, industrial.</span></a>
+    <a class="card" href="hill.html"><div class="shot"><img src="../deck/assets/hero_hill.jpg" alt="" /></div><span class="n">05</span><span class="t">Hill Country</span><span class="f">Warm, friendly, welcoming.</span></a>
+  </div>
+
+  <div class="more">
+    <a href="booking-wizard.html">Booking wizard</a>
+    <a href="round2-concepts.html">Round 2 concepts (Gulf Coast · Ranch Road · Night Yard)</a>
+  </div>
+  <p class="note">Needs an internet connection: the site photos and fonts load from the web.</p>
+</main>
+</body>
+</html>

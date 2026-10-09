@@ -9,6 +9,8 @@ Slide numbers match the default pair: **Big Sky + Heartland Steel**.
 **Big Sky** (warm heritage) and **Heartland Steel** (bold industrial) make the same promise at two volumes: "family company that delivers." Big Sky leans on legacy and trust. Heartland leans on operations and grit. Both work with the gold mark. Big Sky's palette *is* the mark; Heartland's dark stage makes it pop.
 Putting them side by side forces the real question: **do we lead with who we are, or with what we haul?**
 
+**Live sites:** press **W** on any design slide (or tap **Open live ↗**) to scroll the real page. `designs/index.html` lists all five.
+
 To feature a different pair, open the deck with `?pair=` and two names in the URL, e.g. `deck/index.html?pair=piney,openwater`.
 Names: `bigsky`, `piney`, `openwater`, `heartland`, `hill`.
 

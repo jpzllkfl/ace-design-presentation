@@ -139,7 +139,15 @@
   .showcase-cap .num { font: 500 20px/1 var(--mono); color: var(--gold); letter-spacing: .14em; }
   .showcase-cap .name { font: 600 46px/1 var(--serif); }
   .showcase-cap .feel { font-size: 28px; font-weight: 300; opacity: .7; }
-  .showcase-cap .tag { margin-left: auto; font: 500 16px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(214,166,74,.5); padding: 10px 16px; border-radius: 4px; }
+  .showcase-cap .tag { margin-left: auto; margin-right: 6px; font: 500 16px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(214,166,74,.5); padding: 10px 16px; border-radius: 4px; }
+
+  .live {
+    font: 500 16px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; text-decoration: none;
+    color: var(--night); background: var(--gold); padding: 11px 16px; border-radius: 4px; white-space: nowrap;
+  }
+  .live:hover { background: #e3b45e; }
+  a.plain { color: inherit; text-decoration: none; display: block; }
+  .why .live { display: inline-block; margin-top: 30px; }
 
   /* why-it-works */
   .why { display: grid; grid-template-columns: 860px 1fr; gap: 100px; align-items: center; height: 100%; }
@@ -462,6 +470,7 @@
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
     <p class="kicker">Appendix</p>
     <h2>The alternates, full size.</h2>
+    <p class="lede">All five live sites, scrollable: <a href="../designs/index.html" target="_blank" rel="noopener" style="color:var(--gold)">designs/</a> · or press W on any design slide.</p>
   </section>
   <section class="slide stage-dark" data-alt="0" data-kind="show" data-title="Alternate"></section>
   <section class="slide stage-dark" data-alt="1" data-kind="show" data-title="Alternate"></section>
@@ -470,7 +479,7 @@
 </div></div>
 
 <div id="notes"><div class="h">Speaker notes · <span id="notes-title"></span></div><div id="notes-body"></div></div>
-<div id="hint">← → navigate · N notes · G overview · F fullscreen</div>
+<div id="hint">← → navigate · N notes · W live site · G overview · F fullscreen</div>
 <div id="overview"></div>
 
 <script>
@@ -548,6 +557,8 @@ const CONCEPTS = {
   }
 };
 const ORDER = ['bigsky', 'piney', 'openwater', 'heartland', 'hill'];
+ORDER.forEach(k => { CONCEPTS[k].key = k; });
+const live = c => `../designs/${c.key}.html`;
 
 /* Featured pair: default Big Sky + Heartland Steel. Swap with ?pair=piney,openwater */
 let FEATURED = ['bigsky', 'heartland'];
@@ -569,13 +580,14 @@ function renderShow(sec, c, tag) {
     <div class="showcase-cap">
       <span class="num">${c.n}</span><span class="name">${c.name}</span><span class="feel">${c.feel}</span>
       <span class="tag">${tag}</span>
+      <a class="live" href="${live(c)}" target="_blank" rel="noopener">Open live ↗</a>
     </div>`;
 }
 function renderWhy(sec, c, letter) {
   sec.innerHTML = `
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
     <div class="why">
-      <div>${browser(c)}</div>
+      <div>${browser(c)}<a class="live" href="${live(c)}" target="_blank" rel="noopener">Open the live site ↗</a></div>
       <div class="side">
         <p class="kicker">Featured ${letter} · ${c.n}</p>
         <h2>${c.name}</h2>
@@ -588,6 +600,7 @@ function renderWhy(sec, c, letter) {
 
 document.querySelectorAll('[data-feature]').forEach(sec => {
   const i = +sec.dataset.feature, c = CONCEPTS[FEATURED[i]], letter = 'AB'[i];
+  sec.dataset.design = FEATURED[i];
   if (sec.dataset.kind === 'show') {
     renderShow(sec, c, 'Featured ' + letter);
     sec.dataset.title = `Featured ${letter} · ${c.name}`;
@@ -600,6 +613,7 @@ document.querySelectorAll('[data-feature]').forEach(sec => {
 });
 document.querySelectorAll('[data-alt]').forEach(sec => {
   const c = CONCEPTS[ALTS[+sec.dataset.alt]];
+  sec.dataset.design = ALTS[+sec.dataset.alt];
   renderShow(sec, c, 'Alternate');
   sec.dataset.title = `Alternate · ${c.name}`;
   sec.dataset.notes = c.notes;
@@ -607,13 +621,13 @@ document.querySelectorAll('[data-alt]').forEach(sec => {
 
 document.getElementById('five-strip').innerHTML = ORDER.map(k => {
   const c = CONCEPTS[k], f = FEATURED.includes(k);
-  return `<figure class="${f ? 'feat' : 'dim'}"><div class="thumb"><img src="${c.img}" alt="${c.name}" /></div>
-    <figcaption><span class="n">${c.n}${f ? ' · FEATURED' : ''}</span><span class="t">${c.name}</span><span class="f">${c.feel}</span></figcaption></figure>`;
+  return `<figure class="${f ? 'feat' : 'dim'}"><a class="plain" href="${live(c)}" target="_blank" rel="noopener"><div class="thumb"><img src="${c.img}" alt="${c.name}" /></div>
+    <figcaption><span class="n">${c.n}${f ? ' · FEATURED' : ''}</span><span class="t">${c.name}</span><span class="f">${c.feel}</span></figcaption></a></figure>`;
 }).join('');
 
 document.getElementById('three-grid').innerHTML = ALTS.map(k => {
   const c = CONCEPTS[k];
-  return `<div>${browser(c)}<div class="n">${c.n} · ${c.accent}</div><h3>${c.name}</h3><p>${c.feel} ${c.feeling}</p></div>`;
+  return `<a class="plain" href="${live(c)}" target="_blank" rel="noopener">${browser(c)}<div class="n">${c.n} · ${c.accent}</div><h3>${c.name}</h3><p>${c.feel} ${c.feeling}</p></a>`;
 }).join('');
 
 document.querySelector('#compare tbody').innerHTML = ORDER.map(k => {
@@ -701,6 +715,10 @@ addEventListener('keydown', e => {
   else if (k === 'End') go(total - 1);
   else if (k === 'n' || k === 'N') notes.classList.toggle('open');
   else if (k === 'f' || k === 'F') fullscreen();
+  else if (k === 'w' || k === 'W') {
+    const d = slides[cur].dataset.design;
+    window.open(d ? live(CONCEPTS[d]) : '../designs/index.html', '_blank', 'noopener');
+  }
   else if (k === 'g' || k === 'G') { buildOverview(); overview.classList.toggle('open'); }
   else if (k === 'Escape') { overview.classList.remove('open'); notes.classList.remove('open'); }
 });

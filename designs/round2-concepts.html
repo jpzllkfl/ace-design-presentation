@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./polish.css">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin:0; font-family:'Hanken Grotesk',system-ui,sans-serif; background:#0e1418; color:#1c1c1c; -webkit-font-smoothing:antialiased; }
+  .c-gulf { background:
+    radial-gradient(1100px 560px at 100% -8%, rgba(126,184,174,0.16), transparent 55%),
+    radial-gradient(800px 480px at 0% 30%, rgba(10,36,48,0.06), transparent 50%),
+    #e4ecee; }
+  .c-ranch { background:
+    radial-gradient(900px 500px at 0% 0%, rgba(140,71,48,0.07), transparent 50%),
+    #f1ece3; }
+  .c-night { background:#0b0a08; }
+  .ny-row:hover { background: rgba(232,163,24,0.06); }
+  .rr-svc { display:grid; grid-template-columns:120px 1fr 1.4fr; gap:24px; align-items:baseline; padding:28px 0; border-bottom:1px solid #ddd5c8; }
+  .rr-meta { display:grid; grid-template-columns:140px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid #ddd5c8; }
+  .ny-svc { display:grid; grid-template-columns:140px 1fr 80px; gap:20px; align-items:center; padding:22px 8px; border-bottom:1px solid rgba(243,234,214,0.1); }
+  .ny-board-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .ny-board-grid { display:grid; grid-template-columns:110px 1.2fr 1.3fr 120px 130px; gap:12px; min-width:720px; align-items:center; }
+  @media (max-width: 880px){
+    [style*="0.92fr 1.08fr"],
+    [style*="0.9fr 1.1fr"],
+    [style*="1.05fr 0.95fr"],
+    [style*="1.15fr 0.85fr"],
+    [style*="repeat(3, 1fr)"],
+    [style*="repeat(4, 1fr)"],
+    [style*="repeat(6, 1fr)"],
+    [style*="repeat(2, 1fr)"],
+    [style*="1fr 1fr"]{ grid-template-columns:1fr !important; }
+    .ac-circuit-rail { grid-template-columns:1fr 1fr !important; }
+    .rr-svc, .rr-meta, .ny-svc { grid-template-columns:1fr !important; gap:8px !important; }
+  }
+  @media (max-width: 600px){
+    [style*="px 34px"]{ padding-left:20px !important; padding-right:20px !important; }
+    [style*="px 36px"]{ padding-left:20px !important; padding-right:20px !important; }
+    h1[style]{ font-size:clamp(30px,8.5vw,46px) !important; line-height:1.05 !important; }
+    [style*="clamp(42px, 6.4vw, 84px)"]{ font-size:clamp(28px,8vw,46px) !important; }
+    [style*="clamp(40px, 6vw, 78px)"]{ font-size:clamp(28px,8vw,44px) !important; }
+    [style*="clamp(40px, 7vw, 88px)"]{ font-size:clamp(30px,8.5vw,48px) !important; }
+    [style*="gap: 26px"]{ flex-wrap:wrap !important; gap:14px !important; justify-content:flex-end !important; }
+    .ac-circuit-rail { grid-template-columns:1fr !important; }
+  }
+</style>
+<script src="./polish.js" defer></script>
+</helmet>
+
+<div style="background:#0e1418;">
+
+  <!-- ============ SWITCHER ============ -->
+  <div style="position:sticky;top:0;z-index:100;background:rgba(14,20,24,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div style="max-width:1340px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:18px;justify-content:space-between;flex-wrap:wrap;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Ashercrest &mdash; Round 2 · 3 new concepts</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="3">
+          <button class="ac-switcher-btn" onClick="{{ tab.onClick }}" style="{{ tab.style }}"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;opacity:0.6;">{{ tab.num }}</span>{{ tab.name }}</button>
+        </sc-for>
+      </div>
+      <span style="font-size:12px;color:rgba(255,255,255,0.45);">Preferred · Ranch Road &mdash; Round 1 unchanged</span>
+    </div>
+  </div>
+
+  <!-- ============ 06 · GULF COAST ============ -->
+  <sc-if value="{{ show0 }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="06 Gulf Coast" class="c-gulf">
+    <div style="position:relative;min-height:96vh;display:flex;flex-direction:column;background:#0a2430;overflow:hidden;">
+      <img class="ac-hero-media" src="https://images.pexels.com/photos/1117210/pexels-photo-1117210.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Container ship at a steel dock with gantry cranes" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,28,38,0.62) 0%,rgba(7,28,38,0.12) 38%,rgba(7,28,38,0.88) 100%);"></div>
+      <div style="position:relative;z-index:2;max-width:1240px;width:100%;margin:0 auto;padding:28px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-sizing:border-box;">
+        <a href="#top" class="ac-logo-lockup" style="color:#e8f1f2;">
+          <img class="ac-logo ac-logo-lg" src="./assets/ace-logo-light.png" alt="A.C.E. Distribution — Ashercrest Enterprises" />
+          <span class="ac-logo-sub">Ashercrest Enterprises &middot; Gulf South</span>
+        </a>
+        <div style="display:flex;align-items:center;gap:26px;">
+          <a href="#gc-services" class="ac-nav-link" style="font-size:14px;font-weight:600;color:rgba(232,241,242,0.85);">Services</a>
+          <a href="#gc-circuit" class="ac-nav-link" style="font-size:14px;font-weight:600;color:rgba(232,241,242,0.85);">Lanes</a>
+          <a href="#schedule" class="ac-btn ac-btn-primary" style="background:#7eb8ae;color:#071c26;padding:11px 20px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Schedule</a>
+        </div>
+      </div>
+      <div class="ac-hero-copy" style="position:relative;z-index:2;flex:1;max-width:1240px;width:100%;margin:0 auto;padding:0 34px 28px;display:flex;flex-direction:column;justify-content:flex-end;box-sizing:border-box;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#7eb8ae;">Pleasanton hub &middot; Docks, yards, fleets</div>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(42px,6.4vw,84px);line-height:0.96;letter-spacing:-0.01em;color:#e8f1f2;margin:16px 0 0;max-width:16ch;">Steel, salt air, and oil that makes the dock on time.</h1>
+        <p style="font-size:18px;line-height:1.55;color:rgba(232,241,242,0.88);max-width:50ch;margin:20px 0 0;">We blend inland in Pleasanton and run it to the yards that feed Texas, Louisiana, and Oklahoma. Family-owned. Spec held. No call center between you and the truck.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;margin-bottom:36px;">
+          <a href="#schedule" class="ac-btn ac-btn-primary" style="background:#7eb8ae;color:#071c26;padding:16px 26px;border-radius:8px;font-size:16px;font-weight:700;">Schedule a consultation</a>
+          <a href="#gc-services" class="ac-btn ac-btn-ghost" style="background:rgba(232,241,242,0.08);border:1px solid rgba(232,241,242,0.35);color:#e8f1f2;padding:16px 24px;border-radius:8px;font-size:16px;font-weight:600;">View berths</a>
+        </div>
+      </div>
+      <div class="ac-manifest" style="position:relative;z-index:2;background:rgba(7,28,38,0.92);border-top:1px solid rgba(126,184,174,0.28);color:#7eb8ae;padding:14px 34px;">
+        <span>Pleasanton hub</span>
+        <span style="opacity:0.35;">/</span>
+        <span>Texas · Louisiana · Oklahoma</span>
+        <span style="opacity:0.35;">/</span>
+        <span>Mon–Sat</span>
+        <span style="opacity:0.35;">/</span>
+        <span>Sunday the dock is dark</span>
+      </div>
+    </div>
+
+    <div id="gc-about" style="max-width:1240px;margin:0 auto;padding:112px 34px;">
+      <div class="ac-reveal" style="display:grid;grid-template-columns:0.92fr 1.08fr;gap:56px;align-items:center;">
+        <div style="position:relative;min-height:420px;overflow:hidden;border-radius:8px;box-shadow:0 40px 80px -40px rgba(12,26,46,0.55);">
+          <img src="https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Ship at dock from the quay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#5fa79c;">Who we are</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(30px,4vw,52px);line-height:1.02;letter-spacing:-0.01em;color:#122832;margin:14px 0 0;">A family shop with a coastal work ethic.</h2>
+          <p style="font-size:18px;line-height:1.66;color:#4d6570;margin:18px 0 0;">Ashercrest Enterprises (A.C.E.) blends engine, hydraulic, and gear oils in Pleasanton, then delivers bulk and packaged product to yards, fleets, and job sites across the Gulf South. As a Yeshua-centered, God-first company, <span class="ac-ahava">ahava</span> <span class="ac-hebrew">(אהבה)</span> — love — and integrity ride with every load. You'll reach someone from the family who can actually help.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;">
+            <span class="ac-lift" style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#0a2430;border:1px solid #c5d2d6;border-radius:8px;padding:8px 14px;background:#f3f7f8;">Ahava · Love</span>
+            <span class="ac-lift" style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#0a2430;border:1px solid #c5d2d6;border-radius:8px;padding:8px 14px;background:#f3f7f8;">Integrity</span>
+            <span class="ac-lift" style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#0a2430;border:1px solid #c5d2d6;border-radius:8px;padding:8px 14px;background:#f3f7f8;">Stewardship</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="gc-services" style="background:#0a2430;">
+      <div style="max-width:1240px;margin:0 auto;padding:96px 34px;">
+        <div class="ac-reveal">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7eb8ae;">Assigned berths</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(28px,3.8vw,48px);line-height:1.05;color:#e8f1f2;margin:12px 0 0;">Four ways we keep you moving.</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;">
+          <div class="ac-lift ac-reveal" style="background:#0f303c;border:1px solid rgba(126,184,174,0.22);border-radius:8px;padding:26px 24px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7eb8ae;">Berth 01</div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:600;color:#e8f1f2;margin:14px 0 8px;">Custom blending</h3>
+            <p style="font-size:15px;line-height:1.55;color:rgba(232,241,242,0.68);margin:0;">Engine, hydraulic, and gear oils mixed to your equipment and climate.</p>
+          </div>
+          <div class="ac-lift ac-reveal ac-reveal-delay-1" style="background:#0f303c;border:1px solid rgba(126,184,174,0.22);border-radius:8px;padding:26px 24px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7eb8ae;">Berth 02</div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:600;color:#e8f1f2;margin:14px 0 8px;">Bulk sales</h3>
+            <p style="font-size:15px;line-height:1.55;color:rgba(232,241,242,0.68);margin:0;">Oils, fluids, greases, DEF, and coolants — bulk or packaged.</p>
+          </div>
+          <div class="ac-lift ac-reveal ac-reveal-delay-2" style="background:#0f303c;border:1px solid rgba(126,184,174,0.22);border-radius:8px;padding:26px 24px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7eb8ae;">Berth 03</div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:600;color:#e8f1f2;margin:14px 0 8px;">Delivery</h3>
+            <p style="font-size:15px;line-height:1.55;color:rgba(232,241,242,0.68);margin:0;">Scheduled or on-demand, to the yard, fleet, or job site.</p>
+          </div>
+          <div class="ac-lift ac-reveal ac-reveal-delay-3" style="background:#0f303c;border:1px solid rgba(126,184,174,0.22);border-radius:8px;padding:26px 24px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7eb8ae;">Berth 04</div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:600;color:#e8f1f2;margin:14px 0 8px;">Consulting</h3>
+            <p style="font-size:15px;line-height:1.55;color:rgba(232,241,242,0.68);margin:0;">Oil analysis and lubrication programs that cut downtime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="gc-circuit" style="background:#e4ecee;">
+      <div class="ac-reveal" style="max-width:1240px;margin:0 auto;padding:104px 34px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#5fa79c;">The saltwater circuit</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(28px,3.8vw,48px);line-height:1.05;color:#122832;margin:12px 0 0;max-width:20ch;">Blended inland. Delivered to the water's edge.</h2>
+        <p style="font-size:17px;line-height:1.55;color:#4d6570;max-width:54ch;margin:16px 0 0;">Pleasanton sits off the coast and on the way to it. From the hub we run lanes that keep Gulf South yards, terminals, and fleets in spec — without making you wait on a national dispatcher.</p>
+        <div class="ac-circuit-rail" style="grid-template-columns:repeat(6,1fr);margin-top:56px;color:#5fa79c;">
+          <div style="text-align:center;">
+            <div style="width:14px;height:14px;border-radius:50%;background:#0a2430;border:3px solid #7eb8ae;margin:0 auto 14px;box-sizing:border-box;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5fa79c;">Hub</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#122832;margin-top:4px;">Pleasanton</div>
+            <div style="font-size:13px;color:#4d6570;margin-top:4px;">Blend &amp; dispatch</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#7eb8ae;margin:2px auto 16px;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5fa79c;">Lane 02</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#122832;margin-top:4px;">Corpus</div>
+            <div style="font-size:13px;color:#4d6570;margin-top:4px;">Coastal yards</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#7eb8ae;margin:2px auto 16px;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5fa79c;">Lane 03</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#122832;margin-top:4px;">Houston</div>
+            <div style="font-size:13px;color:#4d6570;margin-top:4px;">Ship Channel</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#7eb8ae;margin:2px auto 16px;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5fa79c;">Lane 04</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#122832;margin-top:4px;">Beaumont</div>
+            <div style="font-size:13px;color:#4d6570;margin-top:4px;">Port Arthur</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#7eb8ae;margin:2px auto 16px;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5fa79c;">Lane 05</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#122832;margin-top:4px;">Lake Charles</div>
+            <div style="font-size:13px;color:#4d6570;margin-top:4px;">Louisiana</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#7eb8ae;margin:2px auto 16px;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5fa79c;">Lane 06</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#122832;margin-top:4px;">New Orleans</div>
+            <div style="font-size:13px;color:#4d6570;margin-top:4px;">East reach</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="gc-coverage" style="position:relative;min-height:540px;display:flex;background:#071c26;overflow:hidden;">
+      <img class="ac-hero-media" src="https://images.pexels.com/photos/2226458/pexels-photo-2226458.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Aerial view of a working port" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,28,38,0.78),rgba(7,28,38,0.62));"></div>
+      <div class="ac-reveal" style="position:relative;z-index:2;max-width:1240px;width:100%;margin:0 auto;padding:88px 34px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7eb8ae;">Now serving</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(38px,6vw,80px);line-height:0.98;color:#e8f1f2;margin-top:12px;">Texas · Louisiana · Oklahoma</div>
+        <p style="font-size:18px;line-height:1.55;color:rgba(232,241,242,0.82);max-width:50ch;margin:16px 0 0;">From the Pleasanton hub to the docks and the inland yards behind them. Tell us the gate — we'll put a truck on it.</p>
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:32px;padding-top:28px;border-top:1px solid rgba(126,184,174,0.28);">
+          <a href="#schedule" class="ac-btn ac-btn-primary" style="background:#7eb8ae;color:#071c26;padding:15px 26px;border-radius:8px;font-size:16px;font-weight:700;">Schedule a consultation</a>
+          <span style="font-size:15px;color:rgba(232,241,242,0.8);">info@ashercrestent.com · (830) 555-0142</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="schedule" class="ac-band-shimmer" style="background:#071c26;">
+      <div style="max-width:1180px;margin:0 auto;padding:104px 34px;position:relative;z-index:1;">
+        <div class="ac-reveal" style="max-width:660px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7eb8ae;">Schedule</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(28px,3.8vw,50px);line-height:1.05;color:#e8f1f2;margin:12px 0 0;">Book a berth on the calendar.</h2>
+          <p style="font-size:17px;line-height:1.55;color:rgba(232,241,242,0.75);margin:16px 0 0;">Blend, bulk, delivery, or a consulting call. We'll confirm within one business day. Closed Sundays.</p>
+        </div>
+        <div class="ac-reveal" style="margin-top:34px;max-width:960px;">
+          <dc-import name="BookingWizard" theme="{{ themeGulf }}" hint-size="100%,640px"></dc-import>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact" style="background:#e4ecee;">
+      <div class="ac-reveal" style="max-width:1240px;margin:0 auto;padding:104px 34px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#5fa79c;">Contact</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(30px,4vw,52px);line-height:1.05;color:#122832;margin:14px 0 0;">The radio is on.</h2>
+          <p style="font-size:18px;line-height:1.6;color:#4d6570;margin:16px 0 0;">Call, email, or schedule a time — you'll reach someone from the family who can actually help.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;">
+            <a href="#schedule" class="ac-btn ac-btn-primary" style="text-decoration:none;background:#0a2430;color:#e8f1f2;padding:14px 24px;border-radius:8px;font-size:15px;font-weight:700;">Schedule a call</a>
+            <a href="mailto:info@ashercrestent.com" class="ac-btn" style="text-decoration:none;border:1.5px solid #c5d2d6;color:#122832;padding:14px 22px;border-radius:8px;font-size:15px;font-weight:600;">Email us</a>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="ac-lift" style="background:#f3f7f8;border:1px solid #c5d2d6;border-radius:8px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5fa79c;">Warehouse</div><div style="font-size:15px;color:#122832;margin-top:10px;font-weight:600;">Pleasanton, TX 78064</div></div>
+          <div class="ac-lift" style="background:#f3f7f8;border:1px solid #c5d2d6;border-radius:8px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5fa79c;">Phone</div><div style="font-size:15px;color:#122832;margin-top:10px;font-weight:600;">(830) 555-0142</div></div>
+          <div class="ac-lift" style="background:#f3f7f8;border:1px solid #c5d2d6;border-radius:8px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5fa79c;">Email</div><div style="font-size:14px;color:#122832;margin-top:10px;font-weight:600;word-break:break-all;">info@ashercrestent.com</div></div>
+          <div class="ac-lift" style="background:#f3f7f8;border:1px solid #c5d2d6;border-radius:8px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5fa79c;">Hours</div><div style="font-size:13.5px;color:#122832;margin-top:10px;font-weight:600;line-height:1.5;">Mon&ndash;Fri 7:30&ndash;5:30<br/>Sat by appt &middot; <span style="color:#6a838c;font-weight:500;">Closed Sun</span></div></div>
+        </div>
+      </div>
+      <div style="max-width:1240px;margin:0 auto;padding:0 34px 56px;"><div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid #c5d2d6;padding-top:28px;">
+        <img class="ac-logo ac-logo-sm" src="./assets/ace-logo-dark.png" alt="A.C.E. Distribution" />
+        <span style="font-style:italic;font-size:15px;color:#4d6570;">Yeshua first · <span class="ac-ahava">ahava</span> always · customer always.</span>
+        <span style="font-size:13px;color:#6a838c;">&copy; 2026 Ashercrest Enterprises</span>
+      </div></div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ============ 07 · RANCH ROAD (preferred) ============ -->
+  <sc-if value="{{ show1 }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="07 Ranch Road" class="c-ranch ac-grain" id="top">
+    <a class="rr-skip" href="#schedule">Skip to schedule</a>
+    <div class="rr-hero">
+      <img class="ac-hero-media" src="https://images.pexels.com/photos/14548717/pexels-photo-14548717.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Empty South Texas ranch highway under a wide sky" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 68%;" />
+      <div class="rr-hero-scrim"></div>
+      <div class="rr-hero-frame" aria-hidden="true"></div>
+      <div class="rr-wrap rr-top">
+        <a href="#top" class="ac-logo-lockup" style="color:#f7f4ee;">
+          <img class="ac-logo ac-logo-lg" src="./assets/ace-logo-light.png" alt="A.C.E. Distribution — Ashercrest Enterprises" />
+          <span class="ac-logo-sub">Ashercrest Enterprises · Pleasanton, Texas</span>
+        </a>
+        <nav class="rr-nav" aria-label="Primary">
+          <a href="#rr-about" class="ac-nav-link">About</a>
+          <a href="#rr-services" class="ac-nav-link">Work</a>
+          <a href="#rr-gate" class="ac-nav-link">The gate</a>
+          <a href="#schedule" class="ac-btn ac-btn-primary">Schedule</a>
+        </nav>
+      </div>
+      <div class="ac-hero-copy rr-hero-copy">
+        <div class="rr-hero-rule" aria-hidden="true"></div>
+        <div class="rr-hero-kicker">Farm-to-market · Pleasanton, Texas</div>
+        <h1>A quiet spec for a long country.</h1>
+        <p class="rr-hero-deck">Family-blended oils and fluids for ranches, farms, and highway fleets. Pleasanton to the gate — Texas, Louisiana, Oklahoma.</p>
+        <div class="rr-hero-cta">
+          <a href="#schedule" class="ac-btn ac-btn-primary">Schedule a consultation</a>
+          <a href="#rr-services" class="ac-btn ac-btn-ghost">See the work</a>
+        </div>
+      </div>
+      <div class="rr-rail" aria-label="At a glance">
+        <span>Hub<b>Pleasanton</b></span>
+        <span>Coverage<b>TX · LA · OK</b></span>
+        <span>Hours<b>Mon–Sat</b></span>
+        <span class="is-closed">Sunday<b>Closed</b></span>
+      </div>
+    </div>
+
+    <div id="rr-about" class="rr-wrap rr-section">
+      <div class="ac-reveal rr-about-grid">
+        <div class="rr-about-copy">
+          <div class="rr-eyebrow">Who we are</div>
+          <h2 class="rr-display">A Pleasanton family, keeping other families’ iron honest.</h2>
+          <div class="rr-about-body">
+            <p class="rr-lede">Ashercrest Enterprises blends its own oils in Pleasanton and delivers them on a schedule that fits the work — not a national dispatcher’s. Fair dealing, a clean spec, and a handshake that still means something. When you call, you reach someone who can actually help.</p>
+          </div>
+        </div>
+        <figure class="rr-about-photo">
+          <img src="https://images.pexels.com/photos/35858954/pexels-photo-35858954.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Ochre South Texas ranch country under a wide sky" />
+          <figcaption>Atascosa country · a short run from the shop</figcaption>
+        </figure>
+      </div>
+      <div class="ac-reveal rr-values">
+        <div class="rr-value">
+          <div class="rr-eyebrow">01</div>
+          <h3>Integrity</h3>
+          <p>We show up the way we said we would. A kept word and a full tote.</p>
+        </div>
+        <div class="rr-value">
+          <div class="rr-eyebrow">02</div>
+          <h3>Stewardship</h3>
+          <p>Oil that protects the iron you already own — mixed for this country’s heat and dust.</p>
+        </div>
+        <div class="rr-value">
+          <div class="rr-eyebrow">03</div>
+          <h3>Family</h3>
+          <p>You’ll reach the people who blend it and drive it. Not a call center. Not a ticket.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="rr-services" class="rr-wrap" style="padding-bottom:128px;">
+      <div class="ac-reveal rr-work">
+        <div class="rr-eyebrow">The work</div>
+        <h2 class="rr-display">Four lines in the book. Nothing extra.</h2>
+      </div>
+      <div class="ac-reveal rr-ledger" role="list">
+        <a class="rr-row" href="#schedule" role="listitem">
+          <div class="rr-idx">01</div>
+          <h3>Custom blending</h3>
+          <p>Engine, hydraulic, and gear oils mixed for your equipment and the way this country actually works.</p>
+          <div class="rr-for">Ranch shop</div>
+        </a>
+        <a class="rr-row" href="#schedule" role="listitem">
+          <div class="rr-idx">02</div>
+          <h3>Bulk &amp; packaged</h3>
+          <p>Oils, greases, DEF, and coolants — as much as a tote or as little as a pail.</p>
+          <div class="rr-for">Tote or pail</div>
+        </a>
+        <a class="rr-row" href="#schedule" role="listitem">
+          <div class="rr-idx">03</div>
+          <h3>Delivery</h3>
+          <p>To the ranch latch, the farm shop, or the fleet yard. Scheduled, or when you call.</p>
+          <div class="rr-for">Your gate</div>
+        </a>
+        <a class="rr-row" href="#schedule" role="listitem">
+          <div class="rr-idx">04</div>
+          <h3>Consulting</h3>
+          <p>Oil analysis and straight advice. We’d rather save you a teardown than sell you a drum.</p>
+          <div class="rr-for">Analysis</div>
+        </a>
+      </div>
+    </div>
+
+    <div id="rr-gate" class="rr-gate-band">
+      <div class="rr-wrap rr-section ac-reveal">
+        <div class="rr-eyebrow">What we keep running</div>
+        <h2 class="rr-display">If it rolls through the gate, we have oil for it.</h2>
+        <div class="rr-gates">
+          <article class="rr-gate">
+            <img src="https://images.pexels.com/photos/162240/pexels-photo-162240.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Cattle grazing on open pasture" />
+            <div class="rr-gate-scrim"></div>
+            <div class="rr-gate-copy">
+              <div class="rr-eyebrow">01 · Ranch &amp; pasture</div>
+              <h3>Well jacks, shop presses, the hydraulics that keep a place alive.</h3>
+              <p>AW fluids and greases for the iron that never leaves the property.</p>
+            </div>
+          </article>
+          <article class="rr-gate">
+            <img src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Tractor working a dry field" />
+            <div class="rr-gate-scrim"></div>
+            <div class="rr-gate-copy">
+              <div class="rr-eyebrow">02 · Farm iron</div>
+              <h3>Dust, heat, and oils that stay in the engine.</h3>
+              <p>15W-40 and hydraulics mixed for dry country and long days.</p>
+            </div>
+          </article>
+          <article class="rr-gate">
+            <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Highway fleet trucks on the road" />
+            <div class="rr-gate-scrim"></div>
+            <div class="rr-gate-copy">
+              <div class="rr-eyebrow">03 · Highway fleets</div>
+              <h3>Bulk diesel oils and DEF on a route that knows your yard.</h3>
+              <p>Scheduled drops so the morning starts with product, not a phone tree.</p>
+            </div>
+          </article>
+          <article class="rr-gate">
+            <img src="https://images.pexels.com/photos/1595108/pexels-photo-1595108.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Combine harvesting from above" />
+            <div class="rr-gate-scrim"></div>
+            <div class="rr-gate-copy">
+              <div class="rr-eyebrow">04 · Harvest &amp; heavy</div>
+              <h3>Gear oils and greases for the weeks that don’t clock out.</h3>
+              <p>When the header is down, the spec has to hold until the field is done.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div id="rr-coverage" class="rr-wrap rr-section">
+      <div class="ac-reveal rr-cover">
+        <div>
+          <div class="rr-eyebrow">Now serving</div>
+          <h2 class="rr-display">Texas · Louisiana · Oklahoma</h2>
+          <p class="rr-lede" style="margin-top:20px;">Blended in Pleasanton. Run down the ranch roads and the farm-to-market ones alike. If your gate is on the map and you don’t see the town, ask — we’ll do our best to reach you.</p>
+          <div class="rr-states">
+            <div class="rr-state"><em>TX</em><span>Pleasanton hub · Atascosa, Eagle Ford, the San Antonio rim</span></div>
+            <div class="rr-state"><em>LA</em><span>West reach · yards and shops that sit off the interstate</span></div>
+            <div class="rr-state"><em>OK</em><span>North run · fleets and iron that still take a handshake</span></div>
+          </div>
+        </div>
+        <div class="rr-map">
+          <div class="rr-map-frame">
+            <iframe title="Ashercrest service area — Pleasanton, Texas" src="https://www.openstreetmap.org/export/embed.html?bbox=-99.5%2C28.2%2C-97.5%2C29.7&amp;layer=mapnik&amp;marker=28.967%2C-98.479" loading="lazy"></iframe>
+            <span class="rr-map-tag">Pleasanton, TX · hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="schedule" class="rr-book">
+      <div class="rr-wrap rr-section">
+        <div class="ac-reveal" style="max-width:640px;">
+          <div class="rr-eyebrow">Schedule</div>
+          <h2 class="rr-display">Put a day on the book.</h2>
+          <p class="rr-lede" style="margin-top:16px;">Tell us the gate and the product. We’ll confirm within one business day. Closed Sundays.</p>
+        </div>
+        <div class="ac-reveal" style="margin-top:40px;max-width:960px;">
+          <dc-import name="RanchRoadWizard" hint-size="100%,720px"></dc-import>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact" class="rr-contact">
+      <div class="rr-wrap rr-section">
+        <div class="ac-reveal rr-contact-grid">
+          <div>
+            <div class="rr-eyebrow">Contact</div>
+            <h2 class="rr-display">Come by the shop, or we’ll come to you.</h2>
+            <p class="rr-lede" style="margin-top:16px;">Call, email, or put a time on the book. You’ll reach the family.</p>
+            <div class="rr-contact-cta">
+              <a href="#schedule" class="ac-btn ac-btn-primary">Schedule a call</a>
+              <a href="mailto:info@ashercrestent.com" class="ac-btn ac-btn-ghost">Email us</a>
+            </div>
+          </div>
+          <dl>
+            <div class="rr-meta"><dt>Warehouse</dt><dd>Pleasanton, TX 78064</dd></div>
+            <div class="rr-meta"><dt>Phone</dt><dd>(830) 555-0142</dd></div>
+            <div class="rr-meta"><dt>Email</dt><dd style="word-break:break-all;">info@ashercrestent.com</dd></div>
+            <div class="rr-meta"><dt>Hours</dt><dd>Mon–Fri 7:30–5:30<br/>Sat by appointment · Closed Sundays</dd></div>
+          </dl>
+        </div>
+        <div class="ac-reveal rr-foot">
+          <img class="ac-logo ac-logo-sm" src="./assets/ace-logo-dark.png" alt="A.C.E. Distribution" />
+          <span class="rr-foot-mark">God first, customer always.</span>
+          <small>© 2026 Ashercrest Enterprises</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ============ 08 · NIGHT YARD ============ -->
+  <sc-if value="{{ show2 }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="08 Night Yard" class="c-night">
+    <div class="ac-scan" style="position:relative;min-height:96vh;display:flex;flex-direction:column;background:#0b0a08;overflow:hidden;">
+      <img class="ac-hero-media" src="https://images.pexels.com/photos/20333182/pexels-photo-20333182.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Trucks in a foggy night yard under sodium and flood lights" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,8,0.72) 0%,rgba(11,10,8,0.28) 40%,rgba(11,10,8,0.92) 100%);"></div>
+      <div style="position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-sizing:border-box;">
+        <a href="#top" class="ac-logo-lockup" style="color:#f3ead6;">
+          <img class="ac-logo ac-logo-lg" src="./assets/ace-logo-light.png" alt="A.C.E. Distribution — Ashercrest Enterprises" />
+          <span class="ac-logo-sub">Ashercrest Enterprises · Night operations</span>
+        </a>
+        <div style="display:flex;align-items:center;gap:22px;">
+          <a href="#ny-board" class="ac-nav-link" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(243,234,214,0.8);">Board</a>
+          <a href="#schedule" class="ac-btn ac-btn-primary ac-sodium-glow" style="background:#e8a318;color:#0b0a08;padding:11px 18px;border-radius:2px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Schedule</a>
+        </div>
+      </div>
+      <div class="ac-hero-copy" style="position:relative;z-index:2;flex:1;max-width:1280px;width:100%;margin:0 auto;padding:0 36px 88px;display:flex;flex-direction:column;justify-content:flex-end;box-sizing:border-box;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#f3ead6;border:1px solid rgba(232,163,24,0.4);padding:6px 10px;border-radius:2px;"><span class="ac-sodium-dot"></span> Yard open</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(243,234,214,0.7);border:1px solid rgba(243,234,214,0.18);padding:6px 10px;border-radius:2px;">Next out · 04:30 CT</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(243,234,214,0.7);border:1px solid rgba(243,234,214,0.18);padding:6px 10px;border-radius:2px;">Sunday · dark</span>
+        </div>
+        <div style="position:relative;padding:28px 30px 24px;max-width:720px;color:#e8a318;">
+          <span style="position:absolute;top:0;left:0;width:18px;height:18px;border-top:2px solid;border-left:2px solid;"></span>
+          <span style="position:absolute;top:0;right:0;width:18px;height:18px;border-top:2px solid;border-right:2px solid;"></span>
+          <span style="position:absolute;bottom:0;left:0;width:18px;height:18px;border-bottom:2px solid;border-left:2px solid;"></span>
+          <span style="position:absolute;bottom:0;right:0;width:18px;height:18px;border-bottom:2px solid;border-right:2px solid;"></span>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#e8a318;">Pleasanton yard · Family owned</div>
+          <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,7vw,88px);line-height:0.96;letter-spacing:-0.03em;color:#f3ead6;margin:14px 0 0;">Uptime lives on the night shift.</h1>
+          <p style="font-size:17px;line-height:1.55;color:rgba(243,234,214,0.82);max-width:50ch;margin:18px 0 0;">We blend, stage, and roll so your morning starts with product at the gate. Logistics-minded buyers — this is the board we actually run.</p>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;">
+          <a href="#schedule" class="ac-btn ac-btn-primary ac-sodium-glow" style="background:#e8a318;color:#0b0a08;padding:16px 26px;border-radius:2px;font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;">Schedule a consultation</a>
+          <a href="#ny-board" class="ac-btn ac-btn-ghost" style="background:transparent;border:1px solid rgba(232,163,24,0.45);color:#f3ead6;padding:16px 24px;border-radius:2px;font-size:15px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Tonight's board</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="ny-about" style="max-width:1280px;margin:0 auto;padding:100px 36px;">
+      <div class="ac-reveal" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:end;border-bottom:1px solid rgba(232,163,24,0.18);padding-bottom:56px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#e8a318;">Who we are</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.8vw,48px);line-height:1.08;letter-spacing:-0.02em;color:#f3ead6;margin:14px 0 0;">A family yard that treats downtime like an alarm.</h2>
+        </div>
+        <p style="font-size:17px;line-height:1.65;color:rgba(243,234,214,0.68);margin:0;">Ashercrest Enterprises blends oils in Pleasanton and delivers across Texas, Louisiana, and Oklahoma. God-first, Yeshua-centered — <span class="ac-ahava">ahava</span> <span class="ac-hebrew">(אהבה)</span> means we keep our word after dark and we keep Sunday dark. You'll reach the family. We answer.</p>
+      </div>
+    </div>
+
+    <div id="ny-services" style="max-width:1280px;margin:0 auto;padding:0 36px 96px;">
+      <div class="ac-reveal" style="margin-bottom:22px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#e8a318;">Load types</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,40px);letter-spacing:-0.02em;color:#f3ead6;margin:10px 0 0;">What we put on a truck.</h2>
+      </div>
+      <div style="border-top:1px solid rgba(232,163,24,0.22);">
+        <div class="ny-row ny-svc ac-reveal">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e8a318;">Blend</div>
+          <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#f3ead6;">Custom oil blending</div><div style="font-size:14px;color:rgba(243,234,214,0.58);margin-top:4px;">Engine, hydraulic, gear — mixed to spec before first light.</div></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(243,234,214,0.4);text-align:right;">01</div>
+        </div>
+        <div class="ny-row ny-svc ac-reveal ac-reveal-delay-1">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e8a318;">Bulk</div>
+          <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#f3ead6;">Sales · totes and packaged</div><div style="font-size:14px;color:rgba(243,234,214,0.58);margin-top:4px;">Oils, greases, DEF, coolants. On the shelf or on the truck.</div></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(243,234,214,0.4);text-align:right;">02</div>
+        </div>
+        <div class="ny-row ny-svc ac-reveal ac-reveal-delay-2">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e8a318;">Roll</div>
+          <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#f3ead6;">Fleet &amp; on-site delivery</div><div style="font-size:14px;color:rgba(243,234,214,0.58);margin-top:4px;">Night staging, morning gate. Scheduled or on-demand.</div></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(243,234,214,0.4);text-align:right;">03</div>
+        </div>
+        <div class="ny-row ny-svc ac-reveal ac-reveal-delay-3">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e8a318;">Advise</div>
+          <div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#f3ead6;">Lubrication consulting</div><div style="font-size:14px;color:rgba(243,234,214,0.58);margin-top:4px;">Analysis and programs that keep iron off the downtime list.</div></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(243,234,214,0.4);text-align:right;">04</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ny-board" style="position:relative;background:#12110e;overflow:hidden;">
+      <img src="https://images.pexels.com/photos/8858566/pexels-photo-8858566.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.22;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,8,0.88),rgba(12,11,8,0.92));"></div>
+      <div class="ac-reveal" style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:104px 36px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#e8a318;">Tonight's board</div>
+            <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.8vw,46px);letter-spacing:-0.02em;color:#f3ead6;margin:10px 0 0;">Live loads. Real windows. No theater.</h2>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(243,234,214,0.5);">Placeholder dispatch · Central time</div>
+        </div>
+        <div class="ny-board-scroll" style="border:1px solid rgba(232,163,24,0.28);border-radius:2px;background:rgba(11,10,8,0.72);">
+          <div class="ny-board-grid" style="padding:12px 18px;background:rgba(232,163,24,0.1);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#e8a318;">
+            <div>Load</div><div>Bound for</div><div>Product</div><div>Window</div><div>Status</div>
+          </div>
+          <div class="ny-board-grid" style="padding:16px 18px;border-top:1px solid rgba(243,234,214,0.08);font-size:14px;color:#f3ead6;">
+            <div style="font-family:'JetBrains Mono',monospace;color:#e8a318;">ACE-041</div>
+            <div>Pleasanton yard</div>
+            <div>15W-40 bulk</div>
+            <div style="font-family:'JetBrains Mono',monospace;">04:30</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#0b0a08;background:#e8a318;padding:4px 8px;border-radius:2px;text-align:center;">Staging</div>
+          </div>
+          <div class="ny-board-grid" style="padding:16px 18px;border-top:1px solid rgba(243,234,214,0.08);font-size:14px;color:#f3ead6;">
+            <div style="font-family:'JetBrains Mono',monospace;color:#e8a318;">ACE-044</div>
+            <div>Three Rivers shop</div>
+            <div>Hydraulic AW46</div>
+            <div style="font-family:'JetBrains Mono',monospace;">06:15</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e8a318;border:1px solid rgba(232,163,24,0.5);padding:4px 8px;border-radius:2px;text-align:center;">Blending</div>
+          </div>
+          <div class="ny-board-grid" style="padding:16px 18px;border-top:1px solid rgba(243,234,214,0.08);font-size:14px;color:#f3ead6;">
+            <div style="font-family:'JetBrains Mono',monospace;color:#e8a318;">ACE-047</div>
+            <div>Victoria fleet</div>
+            <div>Grease / DEF</div>
+            <div style="font-family:'JetBrains Mono',monospace;">07:30</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(243,234,214,0.75);border:1px solid rgba(243,234,214,0.22);padding:4px 8px;border-radius:2px;text-align:center;">Confirmed</div>
+          </div>
+          <div class="ny-board-grid" style="padding:16px 18px;border-top:1px solid rgba(243,234,214,0.08);font-size:14px;color:#f3ead6;">
+            <div style="font-family:'JetBrains Mono',monospace;color:#e8a318;">ACE-051</div>
+            <div>Laredo yard</div>
+            <div>Gear oil 80W-90</div>
+            <div style="font-family:'JetBrains Mono',monospace;">09:00</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(243,234,214,0.75);border:1px solid rgba(243,234,214,0.22);padding:4px 8px;border-radius:2px;text-align:center;">On books</div>
+          </div>
+          <div style="padding:14px 18px;border-top:1px solid rgba(232,163,24,0.22);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(243,234,214,0.55);min-width:720px;">Sunday — yard dark. No dispatches. A faith commitment, not a staffing gap.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ny-coverage" style="position:relative;min-height:520px;display:flex;background:#0b0a08;overflow:hidden;">
+      <img class="ac-hero-media" src="https://images.pexels.com/photos/10407689/pexels-photo-10407689.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Oil facilities lit at night" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,8,0.78),rgba(11,10,8,0.7));"></div>
+      <div class="ac-reveal" style="position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;padding:88px 36px;box-sizing:border-box;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#e8a318;">Coverage</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(36px,6vw,76px);line-height:0.96;letter-spacing:-0.03em;color:#f3ead6;margin-top:12px;">TX · LA · OK</div>
+        <p style="font-size:17px;line-height:1.55;color:rgba(243,234,214,0.78);max-width:48ch;margin:16px 0 0;">Night staging out of Pleasanton. Morning product on your yard. Same family on the radio.</p>
+      </div>
+    </div>
+
+    <div id="schedule" style="background:#12110e;">
+      <div style="max-width:1280px;margin:0 auto;padding:104px 36px;">
+        <div class="ac-reveal" style="max-width:680px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#e8a318;">Schedule</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);line-height:1.02;letter-spacing:-0.02em;color:#f3ead6;margin:12px 0 0;">Get a load on the board.</h2>
+          <p style="font-size:17px;line-height:1.55;color:rgba(243,234,214,0.68);margin:16px 0 0;">Pick a service, a date, a window. We confirm within one business day. Sundays stay dark.</p>
+        </div>
+        <div class="ac-reveal" style="margin-top:36px;max-width:960px;">
+          <dc-import name="BookingWizard" theme="{{ themeNight }}" hint-size="100%,640px"></dc-import>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact" style="background:#0b0a08;border-top:1px solid rgba(232,163,24,0.16);">
+      <div class="ac-reveal" style="max-width:1280px;margin:0 auto;padding:104px 36px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#e8a318;">Contact</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4.2vw,52px);line-height:1.02;letter-spacing:-0.02em;color:#f3ead6;margin:14px 0 0;">The radio stays on.</h2>
+          <p style="font-size:17px;line-height:1.6;color:rgba(243,234,214,0.68);margin:16px 0 0;">Call, email, or book a window. You'll reach the family that runs the yard.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;">
+            <a href="#schedule" class="ac-btn ac-btn-primary ac-sodium-glow" style="text-decoration:none;background:#e8a318;color:#0b0a08;padding:14px 22px;border-radius:2px;font-size:14px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;">Schedule a call</a>
+            <a href="mailto:info@ashercrestent.com" class="ac-btn" style="text-decoration:none;border:1px solid rgba(243,234,214,0.3);color:#f3ead6;padding:14px 22px;border-radius:2px;font-size:14px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Email us</a>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:#191714;border:1px solid rgba(232,163,24,0.18);border-radius:2px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#e8a318;">Warehouse</div><div style="font-size:15px;color:#f3ead6;margin-top:10px;font-weight:600;">Pleasanton, TX 78064</div></div>
+          <div style="background:#191714;border:1px solid rgba(232,163,24,0.18);border-radius:2px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#e8a318;">Phone</div><div style="font-size:15px;color:#f3ead6;margin-top:10px;font-weight:600;">(830) 555-0142</div></div>
+          <div style="background:#191714;border:1px solid rgba(232,163,24,0.18);border-radius:2px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#e8a318;">Email</div><div style="font-size:14px;color:#f3ead6;margin-top:10px;font-weight:600;word-break:break-all;">info@ashercrestent.com</div></div>
+          <div style="background:#191714;border:1px solid rgba(232,163,24,0.18);border-radius:2px;padding:22px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#e8a318;">Hours</div><div style="font-size:13.5px;color:#f3ead6;margin-top:10px;font-weight:600;line-height:1.5;">Mon&ndash;Fri 7:30&ndash;5:30<br/>Sat by appt &middot; <span style="color:rgba(243,234,214,0.5);font-weight:500;">Yard dark Sun</span></div></div>
+        </div>
+      </div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 36px 48px;"><div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(232,163,24,0.16);padding-top:24px;">
+        <img class="ac-logo ac-logo-sm" src="./assets/ace-logo-light.png" alt="A.C.E. Distribution" />
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(243,234,214,0.5);">Yeshua first · ahava always · customer always</span>
+        <span style="font-size:13px;color:rgba(243,234,214,0.4);">&copy; 2026 Ashercrest Enterprises</span>
+      </div></div>
+    </div>
+  </section>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 1 };
+  renderVals() {
+    const a = this.state.active;
+    const defs = [['06','Gulf Coast'],['07','Ranch Road'],['08','Night Yard']];
+    const tabs = defs.map((t, i) => ({
+      num: t[0], name: t[1],
+      onClick: () => this.setState({ active: i }),
+      style: {
+        display:'flex', alignItems:'center', gap:'8px', padding:'8px 15px', borderRadius:'999px', cursor:'pointer',
+        border:'1px solid ' + (a === i ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.2)'),
+        background: a === i ? '#ffffff' : 'transparent',
+        color: a === i ? '#0e1418' : 'rgba(255,255,255,0.82)',
+        fontFamily:"'Hanken Grotesk',sans-serif", fontSize:'13px', fontWeight:600, whiteSpace:'nowrap', transition:'all .15s',
+      },
+    }));
+    const themeGulf = { acc:'#7eb8ae', accInk:'#071c26', brand:'#0a2430', onBrand:'#e8f1f2', ink:'#122832', inkSoft:'#4d6570', line:'#c5d2d6', surface:'#ffffff', bg:'#e4ecee', rad:'8px', disp:"'Barlow Condensed',sans-serif", haze:'rgba(126,184,174,0.12)' };
+    const themeRanch = { acc:'#8c4730', accInk:'#f7f4ee', brand:'#2b2824', onBrand:'#f7f4ee', ink:'#2a2622', inkSoft:'#6d665c', line:'#ddd5c8', surface:'#faf8f4', bg:'#f1ece3', rad:'2px', disp:"'Fraunces',serif", haze:'rgba(140,71,48,0.10)' };
+    const themeNight = { acc:'#e8a318', accInk:'#0b0a08', brand:'#0b0a08', onBrand:'#f3ead6', ink:'#f3ead6', inkSoft:'rgba(243,234,214,0.62)', line:'rgba(232,163,24,0.22)', surface:'#191714', bg:'#0b0a08', rad:'2px', disp:"'Space Grotesk',sans-serif", haze:'rgba(232,163,24,0.14)' };
+    return { tabs, show0: a === 0, show1: a === 1, show2: a === 2, themeGulf, themeRanch, themeNight };
+  }
+}
+</script>
+</body>
+</html>

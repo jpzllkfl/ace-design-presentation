@@ -81,6 +81,9 @@ const CONCEPTS = {
   }
 };
 const ORDER = ['bigsky', 'piney', 'openwater', 'heartland', 'hill'];
+// Live sites live in designs/ next to the .pptx; links are relative so they work from a local copy of the repo.
+const liveUrl = k => `designs/${k}.html`;
+ORDER.forEach(k => { CONCEPTS[k].key = k; });
 const FEATURED = ['bigsky', 'heartland'];
 const ALTS = ORDER.filter(k => !FEATURED.includes(k));
 
@@ -173,10 +176,14 @@ const HERO_RATIO = 1100 / 644;
     const bottom = browser(slide, c, x, 0.42, w, c.name);
     const y = bottom + 0.28;
     tb(slide, c.n, { x, y: y + 0.1, w: 0.5, h: 0.3, fontSize: 12, bold: true, color: C.accent1, charSpacing: 2 });
-    tb(slide, c.name, { x: x + 0.55, y, w: 3.6, h: 0.5, fontFace: THEME.headFontFace, fontSize: 26, bold: true, color: C.background2 });
-    tb(slide, c.feel, { x: x + 4.0, y: y + 0.06, w: 3.6, h: 0.4, fontSize: 15, color: 'BDB4A2' });
+    tb(slide, c.name, { x: x + 0.55, y, w: 2.85, h: 0.5, fontFace: THEME.headFontFace, fontSize: 26, bold: true, color: C.background2 });
+    tb(slide, c.feel, { x: x + 3.45, y: y + 0.06, w: 2.8, h: 0.4, fontSize: 15, color: 'BDB4A2' });
+    slide.addText([{ text: 'OPEN LIVE ↗', options: { hyperlink: { url: liveUrl(c.key), tooltip: 'Open the ' + c.name + ' live site' } } }], {
+      isTextBox: true, x: x + w - 1.45, y: y + 0.04, w: 1.45, h: 0.36, align: 'center', valign: 'middle', margin: 0,
+      fontSize: 10, bold: true, charSpacing: 2, color: C.text2, fill: { color: C.accent1 }, objectName: c.name + ' live link'
+    });
     slide.addText(tag.toUpperCase(), {
-      isTextBox: true, x: x + w - 1.65, y: y + 0.04, w: 1.65, h: 0.36, align: 'center', valign: 'middle', margin: 0,
+      isTextBox: true, x: x + w - 3.25, y: y + 0.04, w: 1.65, h: 0.36, align: 'center', valign: 'middle', margin: 0,
       fontSize: 10, bold: true, charSpacing: 2, color: C.accent1, line: { color: C.accent2, width: 0.75 }
     });
   }
@@ -184,7 +191,12 @@ const HERO_RATIO = 1100 / 644;
   function whySlide(slide, c, letter) {
     const bw = 5.9;
     const bh = bw / HERO_RATIO + 0.22;
-    browser(slide, c, L, (7.5 - bh) / 2 + 0.1, bw, c.name, 0.22);
+    const by = (7.5 - bh) / 2 + 0.1;
+    browser(slide, c, L, by, bw, c.name, 0.22);
+    slide.addText([{ text: 'OPEN THE LIVE SITE ↗', options: { hyperlink: { url: liveUrl(c.key), tooltip: 'Open the ' + c.name + ' live site' } } }], {
+      isTextBox: true, x: L, y: by + bh + 0.3, w: 2.3, h: 0.38, align: 'center', valign: 'middle', margin: 0,
+      fontSize: 10, bold: true, charSpacing: 2, color: C.text2, fill: { color: C.accent1 }, objectName: c.name + ' live link'
+    });
     const x = 7.35, w = W - L - x;
     tb(slide, `FEATURED ${letter} · ${c.n}`, { x, y: 1.2, w, h: 0.3, fontSize: 11, bold: true, charSpacing: 3, color: C.accent2 });
     tb(slide, c.name, { x, y: 1.55, w, h: 0.75, fontFace: THEME.headFontFace, fontSize: 38, bold: true, color: C.text1 });
@@ -253,7 +265,7 @@ const HERO_RATIO = 1100 / 644;
     ORDER.forEach((k, i) => {
       const c = CONCEPTS[k], f = FEATURED.includes(k), x = L + i * (tw + gap), y = 3.0;
       if (f) s.addShape(pres.shapes.RECTANGLE, { objectName: c.name + ' highlight', x: x - 0.05, y: y - 0.05, w: tw + 0.1, h: th + 0.1, fill: { color: C.accent1 }, line: { color: C.accent1, width: 0 } });
-      s.addImage({ path: A(c.img), x, y, w: tw, h: th, transparency: f ? 0 : 55, altText: c.name, objectName: c.name + ' thumb' });
+      s.addImage({ path: A(c.img), x, y, w: tw, h: th, transparency: f ? 0 : 55, altText: c.name, objectName: c.name + ' thumb', hyperlink: { url: liveUrl(k), tooltip: 'Open the ' + c.name + ' live site' } });
       tb(s, c.n + (f ? ' · FEATURED' : ''), { x, y: y + th + 0.25, w: tw, h: 0.25, fontSize: 10, bold: true, charSpacing: 2, color: C.accent1 });
       tb(s, c.name, { x, y: y + th + 0.52, w: tw, h: 0.4, fontFace: THEME.headFontFace, fontSize: 18, bold: true, color: f ? C.background2 : '8C826F' });
       tb(s, c.feel, { x, y: y + th + 0.92, w: tw, h: 0.4, fontSize: 12, color: f ? 'BDB4A2' : '6E6656' });
