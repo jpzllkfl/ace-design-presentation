@@ -1,1 +1,39 @@
-$file:/workspace/design_handoff_ashercrest_website/presentation/ACE-Presentation.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A.C.E. Distribution — Loading presentation…</title>
+<style>html,body{margin:0;height:100%;background:#1e180c;color:#f6f2ea;font-family:system-ui,sans-serif}#status{display:grid;place-items:center;height:100%;opacity:.85}</style>
+</head>
+<body>
+<div id="status">Loading A.C.E. presentation…</div>
+<script>
+(async () => {
+  const status = document.getElementById('status');
+  try {
+    const manifest = await fetch('./parts/manifest.json').then(r => {
+      if (!r.ok) throw new Error('manifest ' + r.status);
+      return r.json();
+    });
+    const chunks = [];
+    for (const name of manifest.parts) {
+      status.textContent = 'Loading ' + name + '…';
+      const text = await fetch('./parts/' + name).then(r => {
+        if (!r.ok) throw new Error(name + ' ' + r.status);
+        return r.text();
+      });
+      chunks.push(text);
+    }
+    const html = chunks.join('');
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (e) {
+    status.textContent = 'Could not load presentation: ' + e.message +
+      '. Open README for alternate links.';
+  }
+})();
+</script>
+</body>
+</html>
