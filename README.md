@@ -1,9 +1,15 @@
 # A.C.E. Distribution — Team Design Review
 
-~15-minute internal deck: five homepage designs, scheduling matrix, website upside, and practical QuickBooks / ops automations.
+~15-minute internal deck for the ACE team.
 
-**Phone-ready (temporary ~72h):** https://litter.catbox.moe/458uhh.html
+## Open on iPad
 
-Also open `ACE-Presentation.html` from this repo (or from ACE PR #7) in any browser — images are baked in.
+**https://manuals-survivor-believed-characterization.trycloudflare.com/**
 
-**Controls:** Arrow keys / Space · F fullscreen
+(Live while the share session is up — Safari-friendly multi-file build.)
+
+Backup: https://litter.catbox.moe/of2h3n.html
+
+Or AirDrop `ACE-Presentation.html` / `ACE-iPad.html` and open in Safari.
+
+**Controls:** Swipe / Arrows / Space · F fullscreen
