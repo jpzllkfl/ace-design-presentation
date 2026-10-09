@@ -1,11 +1,9 @@
-# A.C.E. Distribution — Website Design Presentation
+# A.C.E. Distribution — Team Design Review
 
-**Live open links (any phone or computer):**
+~15-minute internal deck: five homepage designs, scheduling matrix, website upside, and practical QuickBooks / ops automations.
 
-- htmlpreview: https://htmlpreview.github.io/?https://github.com/jpzllkfl/ace-design-presentation/blob/main/ACE-Presentation.html
-- raw.githack: https://raw.githack.com/jpzllkfl/ace-design-presentation/main/ACE-Presentation.html
-- GitHub Pages (if enabled): https://jpzllkfl.github.io/ace-design-presentation/ACE-Presentation.html
+**Phone-ready (temporary ~72h):** https://litter.catbox.moe/458uhh.html
 
-Controls: Arrow keys / Space · F fullscreen
+Also open `ACE-Presentation.html` from this repo (or from ACE PR #7) in any browser — images are baked in.
 
-Source file: `ACE-Presentation.html` (self-contained).
+**Controls:** Arrow keys / Space · F fullscreen
