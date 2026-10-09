@@ -1,15 +1,26 @@
-# A.C.E. Distribution — Team Design Review
+# A.C.E. Distribution — Website Design Review
 
-~15-minute internal deck for the ACE team.
+Internal leadership deck: five homepage directions (two featured), EOS accountability, and the decision.
 
-## Open on iPad
+**Open:** `deck/index.html` (the root `index.html` redirects there). Multi-file: keep the `deck/assets/` folder next to it.
 
-**https://manuals-survivor-believed-characterization.trycloudflare.com/**
+## Controls
+| | Keyboard | iPad |
+|---|---|---|
+| Next / back | → ← · Space | Swipe, or tap right/left edge |
+| Speaker notes | N | Two-finger tap |
+| Slide overview | G | — |
+| Fullscreen | F | Add to Home Screen |
 
-(Live while the share session is up — Safari-friendly multi-file build.)
+Owner names, due dates and the picked design on slides 16–17 are typed in place and remembered on that device.
 
-Backup: https://litter.catbox.moe/of2h3n.html
+## Swapping the featured pair
+Default is **Big Sky + Heartland Steel**. To feature any two:
+`deck/index.html?pair=piney,openwater`
+(names: `bigsky`, `piney`, `openwater`, `heartland`, `hill`)
 
-Or AirDrop `ACE-Presentation.html` / `ACE-iPad.html` and open in Safari.
-
-**Controls:** Swipe / Arrows / Space · F fullscreen
+## Files
+- `deck/index.html`: the deck
+- `deck/SPEAKER-NOTES.md`: talk track and why this pair
+- `deck/assets/`: gold/light ACE logo (transparent), five hero shots, five themed booking matrices
+- `archive/ACE-Presentation-draft.html`: the earlier draft, kept for reference only

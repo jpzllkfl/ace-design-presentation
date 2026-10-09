@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>ACE Design Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --night: #15110b;
+    --night-2: #211a10;
+    --cream: #f5efe3;
+    --paper: #faf6ee;
+    --ink: #1d1810;
+    --ink-soft: #6b604c;
+    --gold: #d6a64a;
+    --gold-deep: #a9792a;
+    --line: #e2d6bf;
+    --line-dark: rgba(245, 239, 227, 0.14);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Outfit', 'Avenir Next', 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    background: #0d0a06; color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ---------- 16:9 stage, scaled to fit like PowerPoint ---------- */
+  #viewport { position: fixed; inset: 0; overflow: hidden; }
+  #stage {
+    position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px;
+    transform: translate(-50%, -50%); transform-origin: center center;
+  }
+  .slide {
+    position: absolute; inset: 0; padding: 120px 140px 110px;
+    display: flex; flex-direction: column;
+    background: var(--paper);
+    opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s .35s;
+    overflow: hidden;
+  }
+  .slide.active { opacity: 1; visibility: visible; transition: opacity .35s ease; }
+  .slide.light {
+    background:
+      radial-gradient(1400px 700px at 100% 0%, rgba(214,166,74,.13), transparent 60%),
+      linear-gradient(170deg, var(--paper), var(--cream));
+  }
+  .slide.dark {
+    color: var(--cream);
+    background:
+      radial-gradient(1300px 760px at 88% -8%, rgba(214,166,74,.16), transparent 58%),
+      linear-gradient(165deg, var(--night-2), var(--night) 60%);
+  }
+  .slide.stage-dark { color: var(--cream); background: radial-gradient(1600px 900px at 50% 40%, #241c11, #0f0c08 75%); padding: 0; }
+
+  /* slide chrome: logo top-left, number bottom-right */
+  .chrome-logo { position: absolute; top: 56px; left: 140px; height: 34px; }
+  .slide.light .chrome-logo { filter: brightness(.78) saturate(1.1); }
+  .slide-num {
+    position: absolute; right: 140px; bottom: 52px;
+    font: 500 18px/1 var(--mono); letter-spacing: .14em; opacity: .45;
+  }
+  .slide-tag {
+    position: absolute; left: 140px; bottom: 52px;
+    font: 500 16px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; opacity: .45;
+  }
+
+  /* type */
+  .kicker {
+    font: 500 20px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold-deep); margin: 0 0 36px;
+  }
+  .dark .kicker, .stage-dark .kicker { color: var(--gold); }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; margin: 0; letter-spacing: -0.02em; }
+  h1 { font-size: 132px; line-height: .98; }
+  h2 { font-size: 92px; line-height: 1.02; max-width: 15ch; }
+  h3 { font-size: 46px; line-height: 1.1; }
+  em { font-style: italic; font-weight: 400; }
+  .gold { color: var(--gold); }
+  .light .gold { color: var(--gold-deep); }
+  .lede { font-size: 34px; line-height: 1.45; font-weight: 300; max-width: 40ch; margin: 40px 0 0; color: var(--ink-soft); }
+  .dark .lede { color: rgba(245,239,227,.72); }
+  .rule { width: 96px; height: 4px; background: var(--gold); border: 0; margin: 48px 0; }
+
+  .bottom { margin-top: auto; }
+  .center-v { justify-content: center; }
+
+  /* numbered points */
+  .points { list-style: none; padding: 0; margin: 64px 0 0; display: grid; gap: 0; max-width: 1400px; }
+  .points li {
+    display: grid; grid-template-columns: 110px 1fr; align-items: baseline;
+    padding: 30px 0; border-top: 1px solid var(--line); font-size: 40px; line-height: 1.3;
+  }
+  .dark .points li { border-color: var(--line-dark); }
+  .points li:last-child { border-bottom: 1px solid var(--line); }
+  .dark .points li:last-child { border-color: var(--line-dark); }
+  .points .n { font: 500 22px/1 var(--mono); color: var(--gold-deep); letter-spacing: .1em; }
+  .dark .points .n { color: var(--gold); }
+  .points small { display: block; font-size: 27px; color: var(--ink-soft); font-weight: 300; margin-top: 6px; }
+  .dark .points small { color: rgba(245,239,227,.6); }
+
+  /* big statement */
+  .statement { font-family: var(--serif); font-weight: 600; font-size: 118px; line-height: 1.02; letter-spacing: -0.025em; max-width: 14ch; margin: 0; }
+  .attrib { font: 500 20px/1.4 var(--mono); letter-spacing: .18em; text-transform: uppercase; opacity: .55; margin-top: 48px; }
+
+  /* two-column */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; margin-top: 72px; }
+  .col h3 { margin-bottom: 20px; }
+  .col p { font-size: 32px; line-height: 1.45; font-weight: 300; margin: 0 0 18px; color: var(--ink-soft); }
+  .dark .col p { color: rgba(245,239,227,.7); }
+  .col .label { font: 500 20px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 26px; }
+  .dark .col .label { color: var(--gold); }
+
+  /* browser frame for website shots */
+  .browser {
+    border-radius: 14px; overflow: hidden; background: #111;
+    box-shadow: 0 50px 120px -30px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.07);
+  }
+  .browser .bar { height: 38px; background: #1f1a14; display: flex; align-items: center; gap: 9px; padding: 0 18px; }
+  .browser .bar i { width: 12px; height: 12px; border-radius: 50%; background: #3b342a; display: block; }
+  .browser .bar span { margin-left: 18px; font: 400 15px/1 var(--mono); color: rgba(245,239,227,.4); letter-spacing: .04em; }
+  .browser img { display: block; width: 100%; height: auto; }
+  .light .browser { box-shadow: 0 40px 90px -30px rgba(40,28,10,.45), 0 0 0 1px rgba(0,0,0,.06); }
+
+  /* showcase (featured full slide) */
+  .showcase { position: absolute; inset: 0; display: grid; place-items: center; padding: 84px 0 150px; }
+  .showcase .browser { width: 1500px; }
+  .showcase-cap {
+    position: absolute; left: 210px; right: 210px; bottom: 54px;
+    display: flex; align-items: baseline; gap: 28px;
+  }
+  .showcase-cap .num { font: 500 20px/1 var(--mono); color: var(--gold); letter-spacing: .14em; }
+  .showcase-cap .name { font: 600 46px/1 var(--serif); }
+  .showcase-cap .feel { font-size: 28px; font-weight: 300; opacity: .7; }
+  .showcase-cap .tag { margin-left: auto; font: 500 16px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(214,166,74,.5); padding: 10px 16px; border-radius: 4px; }
+
+  /* why-it-works */
+  .why { display: grid; grid-template-columns: 860px 1fr; gap: 100px; align-items: center; height: 100%; }
+  .why .side h2 { font-size: 80px; }
+  .why .feeling { font-family: var(--serif); font-style: italic; font-size: 40px; line-height: 1.3; color: var(--gold-deep); margin: 26px 0 0; }
+  .why ul { list-style: none; padding: 0; margin: 48px 0 0; }
+  .why li { font-size: 31px; line-height: 1.4; padding: 18px 0 18px 40px; position: relative; border-top: 1px solid var(--line); }
+  .why li::before { content: ''; position: absolute; left: 0; top: 34px; width: 16px; height: 2px; background: var(--gold-deep); }
+  .why li.risk { color: var(--ink-soft); }
+  .why li.risk::before { background: #b9ae98; }
+  .why li b { font-weight: 600; }
+  .swatches { display: flex; gap: 14px; margin-top: 30px; align-items: center; }
+  .swatches i { width: 46px; height: 46px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+  .swatches span { font: 500 18px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); margin-left: 10px; }
+
+  /* five strip */
+  .five { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; margin-top: 80px; }
+  .five figure { margin: 0; transition: opacity .3s; }
+  .five figure.dim { opacity: .4; }
+  .five .thumb { border-radius: 10px; overflow: hidden; aspect-ratio: 16/10; background: #222; box-shadow: 0 20px 50px -20px rgba(0,0,0,.6); }
+  .five .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .five figure.feat .thumb { box-shadow: 0 0 0 4px var(--gold), 0 24px 60px -20px rgba(0,0,0,.7); }
+  .five figcaption { margin-top: 22px; }
+  .five figcaption .n { font: 500 17px/1 var(--mono); letter-spacing: .14em; color: var(--gold); }
+  .five figcaption .t { display: block; font: 600 34px/1.15 var(--serif); margin-top: 10px; }
+  .five figcaption .f { display: block; font-size: 22px; font-weight: 300; opacity: .65; margin-top: 6px; }
+
+  /* other three gallery */
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 64px; }
+  .three .browser .bar { height: 26px; padding: 0 12px; gap: 6px; }
+  .three .browser .bar i { width: 8px; height: 8px; }
+  .three h3 { font-size: 42px; margin-top: 34px; }
+  .three .n { font: 500 18px/1 var(--mono); color: var(--gold-deep); letter-spacing: .14em; margin-top: 34px; }
+  .three .n + h3 { margin-top: 12px; }
+  .three p { font-size: 25px; line-height: 1.45; font-weight: 300; color: var(--ink-soft); margin: 12px 0 0; }
+
+  /* comparison table */
+  table.compare { width: 100%; border-collapse: collapse; margin-top: 60px; font-size: 27px; }
+  .compare th { font: 500 17px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); text-align: left; padding: 0 22px 22px 0; }
+  .compare td { padding: 24px 22px 24px 0; border-top: 1px solid var(--line); vertical-align: top; line-height: 1.35; font-weight: 300; }
+  .compare td:first-child { font: 600 32px/1.1 var(--serif); white-space: nowrap; }
+  .compare td:first-child i { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 16px; vertical-align: 3px; }
+  .compare tr.feat td { background: rgba(214,166,74,.10); }
+  .compare tr.feat td:first-child { box-shadow: inset 4px 0 0 var(--gold); padding-left: 20px; }
+  .compare td:first-child { padding-left: 20px; }
+
+  /* matrix strip */
+  .mstrip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 64px; align-items: start; }
+  .mstrip figure { margin: 0; }
+  .mstrip .frame { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3.4; box-shadow: 0 24px 60px -24px rgba(40,28,10,.55), 0 0 0 1px rgba(0,0,0,.06); }
+  .mstrip img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .mstrip figcaption { font: 500 17px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); margin-top: 18px; }
+
+  /* chapter divider */
+  .chapter-num { font: 400 300px/0.8 var(--serif); color: var(--gold); opacity: .18; position: absolute; right: 120px; bottom: 90px; letter-spacing: -0.04em; }
+
+  /* EOS two-up cards */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 70px; border-top: 1px solid var(--line-dark); }
+  .duo > div { padding: 54px 70px 0 0; }
+  .duo > div + div { padding-left: 70px; border-left: 1px solid var(--line-dark); }
+  .duo .big { font: 600 72px/1 var(--serif); }
+  .duo .meta { font: 500 19px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 22px 0 32px; }
+  .duo p { font-size: 32px; line-height: 1.45; font-weight: 300; color: rgba(245,239,227,.75); margin: 0 0 14px; }
+
+  /* ownership table (editable) */
+  table.own { width: 100%; border-collapse: collapse; margin-top: 56px; font-size: 32px; }
+  .own th { font: 500 17px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); text-align: left; padding: 0 0 20px; }
+  .dark .own th { color: var(--gold); }
+  .own td { padding: 26px 30px 26px 0; border-top: 1px solid var(--line); line-height: 1.3; }
+  .dark .own td { border-color: var(--line-dark); }
+  .own td.what { font-weight: 400; }
+  .own td.what small { display: block; font-size: 24px; font-weight: 300; color: var(--ink-soft); margin-top: 6px; }
+  .dark .own td.what small { color: rgba(245,239,227,.55); }
+  .fill {
+    display: inline-block; min-width: 260px; padding: 4px 6px 6px; border-bottom: 2px solid var(--line);
+    font-family: var(--serif); font-size: 34px; outline: none; color: inherit;
+  }
+  .dark .fill { border-color: rgba(245,239,227,.25); }
+  .fill:empty::before { content: attr(data-placeholder); color: #b9ae98; font-style: italic; font-weight: 400; }
+  .dark .fill:empty::before { color: rgba(245,239,227,.3); }
+  .fill:focus { border-color: var(--gold); }
+
+  /* decision */
+  .pick { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; margin-top: 64px; }
+  .pick button {
+    all: unset; cursor: pointer; border: 1px solid var(--line-dark); border-radius: 12px; padding: 28px 26px;
+    transition: border-color .2s, background .2s;
+  }
+  .pick button .n { font: 500 17px/1 var(--mono); color: var(--gold); letter-spacing: .14em; }
+  .pick button .t { display: block; font: 600 33px/1.1 var(--serif); margin-top: 14px; }
+  .pick button .f { display: block; font-size: 21px; font-weight: 300; opacity: .6; margin-top: 8px; }
+  .pick button.feat { border-color: rgba(214,166,74,.55); }
+  .pick button.chosen { background: var(--gold); border-color: var(--gold); color: var(--night); }
+  .pick button.chosen .n { color: var(--night); }
+  .pick button.chosen .f { opacity: .75; }
+
+  /* notes overlay */
+  #notes {
+    position: fixed; left: 0; right: 0; bottom: 0; max-height: 42vh; overflow: auto;
+    background: rgba(15,12,8,.96); color: var(--cream); border-top: 2px solid var(--gold);
+    padding: 22px clamp(18px, 4vw, 56px) 28px; font-size: clamp(15px, 1.6vw, 21px); line-height: 1.55;
+    transform: translateY(100%); transition: transform .3s ease; z-index: 20;
+  }
+  #notes.open { transform: none; }
+  #notes .h { font: 500 12px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  #notes p { margin: 0 0 10px; max-width: 80ch; }
+
+  /* help hint */
+  #hint {
+    position: fixed; right: 16px; bottom: 14px; z-index: 15;
+    font: 400 12px/1 var(--mono); letter-spacing: .08em; color: rgba(245,239,227,.35);
+    transition: opacity .6s; pointer-events: none;
+  }
+  #hint.gone { opacity: 0; }
+
+  /* overview grid */
+  #overview {
+    position: fixed; inset: 0; z-index: 30; background: rgba(13,10,6,.97); overflow: auto;
+    display: none; padding: 40px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; align-content: start;
+  }
+  #overview.open { display: grid; }
+  #overview button {
+    all: unset; cursor: pointer; color: var(--cream); border: 1px solid rgba(245,239,227,.15); border-radius: 8px; padding: 16px 18px;
+    font: 400 16px/1.35 var(--sans);
+  }
+  #overview button b { display: block; font: 500 12px/1 var(--mono); color: var(--gold); letter-spacing: .14em; margin-bottom: 8px; }
+  #overview button.cur { border-color: var(--gold); }
+
+  @media print {
+    html, body { overflow: visible; height: auto; background: none; }
+    #viewport { position: static; display: block; }
+    #stage { transform: none !important; }
+    .slide { position: relative; opacity: 1; visibility: visible; page-break-after: always; }
+    #notes, #hint, #overview { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+  <!-- 1 · TITLE -->
+  <section class="slide dark center-v" data-title="Title"
+    data-notes="We're not here to admire mockups forever. We're here to pick a face and own what happens next.|Keep this short. The room knows the business. Say what the next stretch is: look at the work, choose, put names on it.">
+    <img src="assets/ace-logo-gold.png" alt="A.C.E. Distribution" style="height:150px;width:auto;align-self:flex-start;margin-bottom:96px" />
+    <p class="kicker">Website design review</p>
+    <h1>Picking ACE’s<br/><em class="gold">public face.</em></h1>
+    <p class="lede">Five directions. Two to sit with. One decision — and the names that carry it.</p>
+  </section>
+
+  <!-- 2 · WHY WE'RE HERE -->
+  <section class="slide light" data-title="Why we’re here"
+    data-notes="Three outcomes. If we leave with a direction but no owner, we didn't finish the meeting.|The site is the first thing a new fleet manager or farm buyer sees before they ever call Pleasanton. That's why it's worth a real decision, not a vibe check.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">Why we’re here</p>
+    <h2>Pick a face.<br/>Leave with <em>owners</em>, not vibes.</h2>
+    <ol class="points">
+      <li><span class="n">01</span><span>Choose the direction the website ships in<small>Five built. Two featured. All on the table.</small></span></li>
+      <li><span class="n">02</span><span>Put one name on the build<small>One owner, not a committee.</small></span></li>
+      <li><span class="n">03</span><span>Leave with Rocks and To-Dos<small>Written down before we stand up.</small></span></li>
+    </ol>
+  </section>
+
+  <!-- 3 · EOS LENS -->
+  <section class="slide dark center-v" data-title="EOS lens"
+    data-notes="EOS is blunt on purpose: one name on the Rock. That's how websites actually ship.|Plant the lens now. We'll come back to it after the designs, when it's time to assign.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker">The lens for today · EOS</p>
+    <p class="statement">One name<br/>on every <em class="gold">Rock.</em></p>
+    <p class="lede">Hold that while we look at the designs. Liking one is easy. Owning it to launch is the job.</p>
+    <span class="slide-tag">Accountability</span>
+  </section>
+
+  <!-- 4 · DESIGN CHAPTER -->
+  <section class="slide dark" data-title="Five directions" id="s-five"
+    data-notes="Five directions were built end to end — homepage, services, booking flow — not just mood boards.|The two highlighted are the ones I want us to sit with. The other three are real alternates; we'll see them side by side after.|Try this with each one: cover the logo for two seconds. Does it still feel like ACE?">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">The work</p>
+    <h2>Five directions.<br/><em class="gold">Two</em> to sit with.</h2>
+    <div class="five" id="five-strip"></div>
+  </section>
+
+  <!-- 5–8 · FEATURED A / B (rendered from data) -->
+  <section class="slide stage-dark" data-feature="0" data-kind="show" data-title="Featured A"></section>
+  <section class="slide light" data-feature="0" data-kind="why" data-title="Featured A · why"></section>
+  <section class="slide stage-dark" data-feature="1" data-kind="show" data-title="Featured B"></section>
+  <section class="slide light" data-feature="1" data-kind="why" data-title="Featured B · why"></section>
+
+  <!-- 9 · OTHER THREE -->
+  <section class="slide light" data-title="The other three"
+    data-notes="These are not throwaways. Each one is a complete direction and any of them could ship.|If someone in the room is pulling for one of these, now is the time to say so — we can swap it into the final two.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">Also on the table</p>
+    <h2 style="max-width:none">The other three.</h2>
+    <div class="three" id="three-grid"></div>
+  </section>
+
+  <!-- 10 · ALL FIVE COMPARISON -->
+  <section class="slide light" data-title="Side by side"
+    data-notes="One line each so we're comparing the same things: feeling, who it speaks to, what it costs us.|The risk column is where the real conversation is.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">All five, side by side</p>
+    <table class="compare" id="compare">
+      <thead><tr><th style="padding-left:20px">Direction</th><th>Feeling</th><th>Speaks to</th><th>Watch out for</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- 11 · BOOKING -->
+  <section class="slide light" data-title="Booking"
+    data-notes="One slide on this — it's supporting, not the story.|Whichever face we pick, the booking matrix already wears it. The site doesn't just look good; it turns a visit into a scheduled delivery window.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">How the site converts</p>
+    <h2 style="max-width:22ch">Booking is built in — and it wears whichever face we pick.</h2>
+    <div class="mstrip" id="mstrip"></div>
+  </section>
+
+  <!-- 12 · EOS CHAPTER -->
+  <section class="slide dark center-v" data-title="Accountability"
+    data-notes="Shift gears. The designs are the easy part. This is the part that decides whether the site exists in ninety days.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker">EOS · Traction</p>
+    <h1>Accountability.</h1>
+    <p class="lede">Picking a design isn’t the finish line. It’s the first thing someone has to own.</p>
+    <span class="chapter-num">EOS</span>
+  </section>
+
+  <!-- 13 · ONE PERSON -->
+  <section class="slide dark" data-title="One person owns it"
+    data-notes="In EOS every seat has one person accountable. Not two. Not 'the team.'|The Accountability Chart isn't the org chart. It's who owns which outcome. The website needs a seat and a name in it.|Accountability isn't blame. It's clarity — so nobody has to guess who's driving.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">One seat · one name</p>
+    <p class="statement" style="font-size:104px;max-width:16ch">If everyone owns it, <em class="gold">no one</em> owns it.</p>
+    <div class="cols" style="margin-top:auto">
+      <div class="col">
+        <div class="label">Accountability Chart</div>
+        <p>Names who owns each outcome — not who reports to whom. The website gets a seat, and the seat gets one name.</p>
+      </div>
+      <div class="col">
+        <div class="label">Not blame</div>
+        <p>Clarity + ownership + follow-through. Clarity kills drift. Nobody wonders who’s driving.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 · ROCKS & TO-DOS -->
+  <section class="slide dark" data-title="Rocks & To-Dos"
+    data-notes="Rocks are the few things that matter this quarter. You take one, you drive it to done.|To-Dos are the weekly promises. You do them — or you raise the flag early, not at the deadline.|Both are commitments to yourself and to the team. Same standard.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">Commitments</p>
+    <h2 style="max-width:none">What you say, you do.</h2>
+    <div class="duo">
+      <div>
+        <div class="big">Rocks</div>
+        <div class="meta">90 days · few · important</div>
+        <p>The handful of things that must be true by the end of the quarter.</p>
+        <p>You take a Rock → you drive it to done.</p>
+      </div>
+      <div>
+        <div class="big">To-Dos</div>
+        <div class="meta">7 days · short · specific</div>
+        <p>This week’s promises to the team.</p>
+        <p>Done — or flag it early. Never quietly late.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · DRIVE -->
+  <section class="slide dark center-v" data-title="Drive"
+    data-notes="This is the personal one. You are accountable for the things you give yourself.|Ambition without ownership is noise. Everyone in this room has had a 'we should redo the website' moment. You don't get credit for the intention to rebuild the site. You get credit for the finish.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker">Drive</p>
+    <p class="statement">Finish what you <em class="gold">gave yourself.</em></p>
+    <p class="lede">Ambition without ownership is noise. Credit goes to the finish — not the intention.</p>
+  </section>
+
+  <!-- 16 · WEBSITE ROCKS -->
+  <section class="slide light" data-title="Website Rocks"
+    data-notes="What it means for ACE this quarter. These are proposed — adjust them in the room.|Tap a name field and type. Names stay on this device so they'll be there when you come back to the deck.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">This quarter · proposed Rocks</p>
+    <h2 style="max-width:none">The website, as Rocks.</h2>
+    <table class="own">
+      <thead><tr><th style="width:62%">Rock</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Launch the homepage in the chosen direction<small>Live on the domain, mobile-checked, real photos.</small></td><td><span class="fill" contenteditable="true" data-key="rock1" data-placeholder="Name"></span></td></tr>
+        <tr><td class="what">Booking flow taking real requests<small>Matrix live, requests landing with whoever confirms windows.</small></td><td><span class="fill" contenteditable="true" data-key="rock2" data-placeholder="Name"></span></td></tr>
+        <tr><td class="what">Content &amp; photos ready to publish<small>Services, coverage, contact — written and approved.</small></td><td><span class="fill" contenteditable="true" data-key="rock3" data-placeholder="Name"></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 17 · DECISION -->
+  <section class="slide dark" data-title="Decision"
+    data-notes="Ask it plainly: which face ships? If the room can't land on one, land on two and name who decides by when.|Tap a card to mark the pick. Then fill the To-Dos before anyone stands up.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">Decision</p>
+    <h2 style="max-width:none">Which face ships?</h2>
+    <div class="pick" id="pick"></div>
+    <table class="own" style="margin-top:64px;font-size:30px">
+      <thead><tr><th style="width:56%">To-Do · this week</th><th style="width:24%">Owner</th><th>Due</th></tr></thead>
+      <tbody>
+        <tr><td class="what">Confirm the direction (or final two + who decides)</td><td><span class="fill" contenteditable="true" data-key="todo1o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo1d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+        <tr><td class="what">Kick off the build with the chosen design</td><td><span class="fill" contenteditable="true" data-key="todo2o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo2d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+        <tr><td class="what">Gather photos &amp; copy owners need</td><td><span class="fill" contenteditable="true" data-key="todo3o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo3d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 18 · CLOSE -->
+  <section class="slide dark center-v" data-title="Close"
+    data-notes="Close on the commitment, not the design. Read the names back.">
+    <img src="assets/ace-logo-gold.png" alt="A.C.E. Distribution" style="height:110px;width:auto;align-self:flex-start;margin-bottom:90px" />
+    <p class="statement">Own it.<br/><em class="gold">Finish it.</em></p>
+    <p class="lede">We picked a face. Now we put the names on it and drive it to done.</p>
+  </section>
+
+  <!-- APPENDIX: full showcase of every non-featured design (rendered from data) -->
+  <section class="slide dark center-v" data-title="Appendix"
+    data-notes="Backup slides: a full view of each alternate, in case the room wants to swap one into the final two.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker">Appendix</p>
+    <h2>The alternates, full size.</h2>
+  </section>
+  <section class="slide stage-dark" data-alt="0" data-kind="show" data-title="Alternate"></section>
+  <section class="slide stage-dark" data-alt="1" data-kind="show" data-title="Alternate"></section>
+  <section class="slide stage-dark" data-alt="2" data-kind="show" data-title="Alternate"></section>
+
+</div></div>
+
+<div id="notes"><div class="h">Speaker notes · <span id="notes-title"></span></div><div id="notes-body"></div></div>
+<div id="hint">← → navigate · N notes · G overview · F fullscreen</div>
+<div id="overview"></div>
+
+<script>
+/* ---------- The five directions ---------- */
+const CONCEPTS = {
+  bigsky: {
+    n: '01', name: 'Big Sky', feel: 'Warm, editorial, timeless.',
+    accent: 'Gold · prairie heritage', colors: ['#d6a64a', '#2a1d10', '#f4ecdc'],
+    img: 'assets/hero_bigsky.jpg', matrix: 'assets/matrix_bigsky.jpg',
+    feeling: 'A family company that’s been doing this right for a long time.',
+    speaks: 'Farm, ranch, and long-time accounts',
+    risk: 'Can read soft or lifestyle to hard-nosed fleet buyers.',
+    why: [
+      '<b>The gold is ours.</b> Its palette is the ACE mark — the logo looks native, not placed.',
+      '<b>Editorial serif = credibility.</b> Reads established without reading corporate.',
+      '<b>“Delivered like family”</b> says the family-company promise without a history lesson.'
+    ],
+    notes: 'Name the feeling in one sentence: a family company that has been doing this right for a long time.|Point out how the gold in the site is the gold in our mark — nothing fights the logo.|Ask the room: cover the logo for two seconds. Still ACE?'
+  },
+  piney: {
+    n: '02', name: 'Piney Woods', feel: 'Rooted, calm, organic.',
+    accent: 'Forest green · handshake trust', colors: ['#c9b27c', '#24301f', '#eef0e6'],
+    img: 'assets/hero_piney.jpg', matrix: 'assets/matrix_piney.jpg',
+    feeling: 'The handshake you can trust.',
+    speaks: 'Relationship buyers who value calm and trust',
+    risk: 'Green pulls away from the gold mark; forest isn’t oilfield TX-LA-OK.',
+    why: [
+      '<b>Calmest of the five.</b> Lets trust do the selling.',
+      '<b>“Grown from family. Built on trust.”</b> Clear, quiet headline.',
+      '<b>How-it-works band</b> walks a new buyer through ordering.'
+    ],
+    notes: 'The handshake you can trust. Calm, rooted.|Honest risk: the green pulls away from our gold, and the forest feels East Texas more than our corridors.'
+  },
+  openwater: {
+    n: '03', name: 'Open Water', feel: 'Crisp, corporate, confident.',
+    accent: 'Teal / sand · B2B polish', colors: ['#d8a35a', '#14303a', '#f2ede2'],
+    img: 'assets/hero_openwater.jpg', matrix: 'assets/matrix_openwater.jpg',
+    feeling: 'A supplier that runs like a serious business.',
+    speaks: 'Procurement and larger B2B accounts',
+    risk: 'Offshore rig reads as drilling, not distribution. Coolest temperature.',
+    why: [
+      '<b>Sharpest B2B polish.</b> Feels at home in a procurement review.',
+      '<b>“Clean oil. Clear counsel. On time, every time.”</b> Promise as a rhythm.',
+      '<b>Product grid</b> built for buyers who already know what they want.'
+    ],
+    notes: 'A supplier that runs like a serious business. Built for procurement.|Risk: the offshore rig says drilling, not distribution. Imagery would need to change.'
+  },
+  heartland: {
+    n: '04', name: 'Heartland Steel', feel: 'Bold, cinematic, industrial.',
+    accent: 'Orange on dark · ops drama', colors: ['#e08a2c', '#141210', '#efe7da'],
+    img: 'assets/hero_heartland.jpg', matrix: 'assets/matrix_heartland.jpg',
+    feeling: 'Heavy-duty product and people who answer the phone.',
+    speaks: 'Fleet, oilfield, and operations buyers',
+    risk: 'Loudest option. The orange accent needs tuning toward our gold.',
+    why: [
+      '<b>Built for the buyer who runs trucks.</b> Speaks ops, not lifestyle.',
+      '<b>Dark stage lets the mark pop.</b> The gold logo has never looked stronger.',
+      '<b>Most distinct in the market.</b> Nobody in our space looks like this.'
+    ],
+    notes: 'Heavy-duty product and people who answer the phone. Built for the long haul.|This is the same promise as Big Sky at a different volume.|Fair risk: it is loud, and the orange would move toward our gold in the build.'
+  },
+  hill: {
+    n: '05', name: 'Hill Country', feel: 'Warm, friendly, welcoming.',
+    accent: 'Terracotta · Texas hospitality', colors: ['#b8553a', '#2c2118', '#f3ead9'],
+    img: 'assets/hero_hill.jpg', matrix: 'assets/matrix_hill.jpg',
+    feeling: 'Pull up a chair — we’ll take care of you.',
+    speaks: 'Smaller and first-time accounts',
+    risk: 'Most consumer-feeling; terracotta competes with the gold mark.',
+    why: [
+      '<b>Friendliest door in.</b> Lowers the bar to the first call.',
+      '<b>“Welcome to the family.”</b> Hospitality as the brand.',
+      '<b>Card-on-landscape hero</b> keeps the message front and center.'
+    ],
+    notes: 'Pull up a chair — Texas hospitality.|Risk: it is the most consumer-feeling of the five, and terracotta competes with our gold.'
+  }
+};
+const ORDER = ['bigsky', 'piney', 'openwater', 'heartland', 'hill'];
+
+/* Featured pair: default Big Sky + Heartland Steel. Swap with ?pair=piney,openwater */
+let FEATURED = ['bigsky', 'heartland'];
+try {
+  const p = new URLSearchParams(location.search).get('pair');
+  if (p) {
+    const ids = p.split(',').map(s => s.trim()).filter(s => CONCEPTS[s]);
+    if (ids.length === 2 && ids[0] !== ids[1]) FEATURED = ids;
+  }
+} catch (e) {}
+const ALTS = ORDER.filter(k => !FEATURED.includes(k));
+
+const browser = (c, extra = '') =>
+  `<div class="browser" ${extra}><div class="bar"><i></i><i></i><i></i><span>ace distribution · ${c.name.toLowerCase()}</span></div><img src="${c.img}" alt="${c.name} homepage concept" /></div>`;
+
+function renderShow(sec, c, tag) {
+  sec.innerHTML = `
+    <div class="showcase">${browser(c)}</div>
+    <div class="showcase-cap">
+      <span class="num">${c.n}</span><span class="name">${c.name}</span><span class="feel">${c.feel}</span>
+      <span class="tag">${tag}</span>
+    </div>`;
+}
+function renderWhy(sec, c, letter) {
+  sec.innerHTML = `
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <div class="why">
+      <div>${browser(c)}</div>
+      <div class="side">
+        <p class="kicker">Featured ${letter} · ${c.n}</p>
+        <h2>${c.name}</h2>
+        <p class="feeling">“${c.feeling}”</p>
+        <ul>${c.why.map(w => `<li>${w}</li>`).join('')}<li class="risk"><b>Watch:</b> ${c.risk}</li></ul>
+        <div class="swatches">${c.colors.map(h => `<i style="background:${h}"></i>`).join('')}<span>${c.accent}</span></div>
+      </div>
+    </div>`;
+}
+
+document.querySelectorAll('[data-feature]').forEach(sec => {
+  const i = +sec.dataset.feature, c = CONCEPTS[FEATURED[i]], letter = 'AB'[i];
+  if (sec.dataset.kind === 'show') {
+    renderShow(sec, c, 'Featured ' + letter);
+    sec.dataset.title = `Featured ${letter} · ${c.name}`;
+    sec.dataset.notes = c.notes;
+  } else {
+    renderWhy(sec, c, letter);
+    sec.dataset.title = `${c.name} · why it works`;
+    sec.dataset.notes = 'Three reasons it works for ACE, one honest risk.|' + c.why.map(w => w.replace(/<[^>]+>/g, '')).join('|') + '|Watch: ' + c.risk;
+  }
+});
+document.querySelectorAll('[data-alt]').forEach(sec => {
+  const c = CONCEPTS[ALTS[+sec.dataset.alt]];
+  renderShow(sec, c, 'Alternate');
+  sec.dataset.title = `Alternate · ${c.name}`;
+  sec.dataset.notes = c.notes;
+});
+
+document.getElementById('five-strip').innerHTML = ORDER.map(k => {
+  const c = CONCEPTS[k], f = FEATURED.includes(k);
+  return `<figure class="${f ? 'feat' : 'dim'}"><div class="thumb"><img src="${c.img}" alt="${c.name}" /></div>
+    <figcaption><span class="n">${c.n}${f ? ' · FEATURED' : ''}</span><span class="t">${c.name}</span><span class="f">${c.feel}</span></figcaption></figure>`;
+}).join('');
+
+document.getElementById('three-grid').innerHTML = ALTS.map(k => {
+  const c = CONCEPTS[k];
+  return `<div>${browser(c)}<div class="n">${c.n} · ${c.accent}</div><h3>${c.name}</h3><p>${c.feel} ${c.feeling}</p></div>`;
+}).join('');
+
+document.querySelector('#compare tbody').innerHTML = ORDER.map(k => {
+  const c = CONCEPTS[k];
+  return `<tr class="${FEATURED.includes(k) ? 'feat' : ''}"><td><i style="background:${c.colors[0]}"></i>${c.name}</td><td>${c.feel}</td><td>${c.speaks}</td><td>${c.risk}</td></tr>`;
+}).join('');
+
+document.getElementById('mstrip').innerHTML = ORDER.map(k => {
+  const c = CONCEPTS[k];
+  return `<figure><div class="frame"><img src="${c.matrix}" alt="${c.name} booking matrix" /></div><figcaption>${c.n} · ${c.name}</figcaption></figure>`;
+}).join('');
+
+/* ---------- local persistence for names / pick (per-device convenience) ---------- */
+const store = {
+  get(k) { try { return localStorage.getItem('ace-deck:' + k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem('ace-deck:' + k, v); } catch (e) {} }
+};
+document.querySelectorAll('.fill').forEach(el => {
+  const v = store.get(el.dataset.key); if (v) el.textContent = v;
+  el.addEventListener('input', () => store.set(el.dataset.key, el.textContent.trim()));
+  el.addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); el.blur(); } });
+});
+const pick = document.getElementById('pick');
+pick.innerHTML = ORDER.map(k => {
+  const c = CONCEPTS[k];
+  return `<button data-k="${k}" class="${FEATURED.includes(k) ? 'feat' : ''}"><span class="n">${c.n}</span><span class="t">${c.name}</span><span class="f">${c.feel}</span></button>`;
+}).join('');
+const paintPick = k => pick.querySelectorAll('button').forEach(b => b.classList.toggle('chosen', b.dataset.k === k));
+paintPick(store.get('pick'));
+pick.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const k = b.classList.contains('chosen') ? '' : b.dataset.k;
+  store.set('pick', k); paintPick(k);
+});
+
+/* ---------- deck engine ---------- */
+const slides = [...document.querySelectorAll('.slide')];
+const stage = document.getElementById('stage');
+const total = slides.length;
+slides.forEach((s, i) => {
+  if (s.classList.contains('stage-dark')) return;
+  const n = document.createElement('span');
+  n.className = 'slide-num'; n.textContent = String(i + 1).padStart(2, '0');
+  s.appendChild(n);
+});
+
+function fit() {
+  const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(-50%, -50%) scale(${s})`;
+}
+addEventListener('resize', fit); fit();
+
+let cur = 0;
+function go(i) {
+  i = Math.max(0, Math.min(total - 1, i));
+  slides[cur].classList.remove('active');
+  cur = i;
+  slides[cur].classList.add('active');
+  const s = slides[cur];
+  document.getElementById('notes-title').textContent = `${cur + 1} / ${total} · ${s.dataset.title || ''}`;
+  document.getElementById('notes-body').innerHTML = (s.dataset.notes || '—').split('|').map(p => `<p>${p}</p>`).join('');
+  try { history.replaceState(null, '', location.pathname + location.search + '#' + (cur + 1)); } catch (e) {}
+  if (overview.classList.contains('open')) buildOverview();
+}
+const notes = document.getElementById('notes');
+const overview = document.getElementById('overview');
+function buildOverview() {
+  overview.innerHTML = slides.map((s, i) => `<button data-i="${i}" class="${i === cur ? 'cur' : ''}"><b>${String(i + 1).padStart(2, '0')}</b>${s.dataset.title || ''}</button>`).join('');
+}
+overview.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  overview.classList.remove('open'); go(+b.dataset.i);
+});
+function fullscreen() {
+  const d = document.documentElement;
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) (d.requestFullscreen || d.webkitRequestFullscreen || (() => {})).call(d);
+  else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+}
+addEventListener('keydown', e => {
+  if (e.target.isContentEditable) return;
+  const k = e.key;
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); go(cur + 1); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); go(cur - 1); }
+  else if (k === 'Home') go(0);
+  else if (k === 'End') go(total - 1);
+  else if (k === 'n' || k === 'N') notes.classList.toggle('open');
+  else if (k === 'f' || k === 'F') fullscreen();
+  else if (k === 'g' || k === 'G') { buildOverview(); overview.classList.toggle('open'); }
+  else if (k === 'Escape') { overview.classList.remove('open'); notes.classList.remove('open'); }
+});
+/* touch: swipe left/right to move; two-finger tap toggles notes */
+let tx = null, ty = null;
+addEventListener('touchstart', e => {
+  if (e.touches.length === 2) { notes.classList.toggle('open'); tx = null; return; }
+  tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+}, { passive: true });
+addEventListener('touchend', e => {
+  if (tx === null || overview.classList.contains('open')) return;
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+  tx = null;
+}, { passive: true });
+/* click right/left third of the screen on non-interactive areas */
+document.getElementById('viewport').addEventListener('click', e => {
+  if (e.target.closest('button, .fill, a')) return;
+  if (e.clientX > innerWidth * 0.66) go(cur + 1);
+  else if (e.clientX < innerWidth * 0.33) go(cur - 1);
+});
+setTimeout(() => document.getElementById('hint').classList.add('gone'), 5000);
+
+const start = parseInt(location.hash.slice(1), 10);
+slides[0].classList.add('active');
+go(Number.isFinite(start) ? start - 1 : 0);
+</script>
+</body>
+</html>
