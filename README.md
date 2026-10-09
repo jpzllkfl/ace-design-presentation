@@ -24,11 +24,20 @@ Default is **Big Sky + Heartland Steel**. To feature any two:
 (names: `bigsky`, `piney`, `openwater`, `heartland`, `hill`)
 
 ## Live designs
-Every design slide in both decks has an **Open live ↗** link, and the five thumbnails on the "Five directions" slide are links too. They open the full page in a new tab, where the tabs at the top switch between all five.
+Every design slide in both decks has an **Open live ↗** link (in the HTML deck, **W** does the same), and the five thumbnails on the "Five directions" slide are links too.
 
-Direct links: `designs/bigsky.html`, `piney.html`, `openwater.html`, `heartland.html`, `hill.html`.
+The links open the hosted copy, so they work wherever the deck is opened, as long as there's internet:
+- All five: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/index.html
+- Big Sky: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/bigsky.html
+- Piney Woods: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/piney.html
+- Open Water: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/openwater.html
+- Heartland Steel: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/heartland.html
+- Hill Country: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/hill.html
+- HTML deck: https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/deck/index.html
 
-The PowerPoint links are relative, so keep `ACE-Design-Review.pptx` in the same folder as `designs/` (as it is in this repo).
+In PowerPoint, links only respond in **Slide Show** mode (or Ctrl/Cmd-click while editing).
+
+To use GitHub Pages instead, enable it in the repo settings and change `LIVE_BASE` in `deck/index.html` and `pptx/build-pptx.js`.
 
 ## Files
 - `ACE-Design-Review.pptx`: the PowerPoint version (featured pair: Big Sky + Heartland Steel)

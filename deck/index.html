@@ -470,7 +470,7 @@
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
     <p class="kicker">Appendix</p>
     <h2>The alternates, full size.</h2>
-    <p class="lede">All five live sites, scrollable: <a href="../designs/index.html" target="_blank" rel="noopener" style="color:var(--gold)">designs/</a> · or press W on any design slide.</p>
+    <p class="lede">All five live sites, scrollable: <a href="https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/index.html" target="_blank" rel="noopener" style="color:var(--gold)">designs/</a> · or press W on any design slide.</p>
   </section>
   <section class="slide stage-dark" data-alt="0" data-kind="show" data-title="Alternate"></section>
   <section class="slide stage-dark" data-alt="1" data-kind="show" data-title="Alternate"></section>
@@ -558,7 +558,10 @@ const CONCEPTS = {
 };
 const ORDER = ['bigsky', 'piney', 'openwater', 'heartland', 'hill'];
 ORDER.forEach(k => { CONCEPTS[k].key = k; });
-const live = c => `../designs/${c.key}.html`;
+// Live sites are opened from the hosted copy so the links work wherever the deck is opened
+// (a downloaded file, the Files app, another device). Swap LIVE_BASE for a GitHub Pages URL if you enable Pages.
+const LIVE_BASE = 'https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/';
+const live = c => `${LIVE_BASE}${c.key}.html`;
 
 /* Featured pair: default Big Sky + Heartland Steel. Swap with ?pair=piney,openwater */
 let FEATURED = ['bigsky', 'heartland'];
@@ -717,7 +720,7 @@ addEventListener('keydown', e => {
   else if (k === 'f' || k === 'F') fullscreen();
   else if (k === 'w' || k === 'W') {
     const d = slides[cur].dataset.design;
-    window.open(d ? live(CONCEPTS[d]) : '../designs/index.html', '_blank', 'noopener');
+    window.open(d ? live(CONCEPTS[d]) : LIVE_BASE + 'index.html', '_blank', 'noopener');
   }
   else if (k === 'g' || k === 'G') { buildOverview(); overview.classList.toggle('open'); }
   else if (k === 'Escape') { overview.classList.remove('open'); notes.classList.remove('open'); }

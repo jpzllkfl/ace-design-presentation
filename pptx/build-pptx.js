@@ -81,8 +81,10 @@ const CONCEPTS = {
   }
 };
 const ORDER = ['bigsky', 'piney', 'openwater', 'heartland', 'hill'];
-// Live sites live in designs/ next to the .pptx; links are relative so they work from a local copy of the repo.
-const liveUrl = k => `designs/${k}.html`;
+// Live sites open from the hosted copy, so the links work even when the .pptx is opened on its own.
+// Swap LIVE_BASE for a GitHub Pages URL if you enable Pages.
+const LIVE_BASE = 'https://raw.githack.com/jpzllkfl/ace-design-presentation/claude/ace-design-presentation-rebuild-b1ft9r/designs/';
+const liveUrl = k => `${LIVE_BASE}${k}.html`;
 ORDER.forEach(k => { CONCEPTS[k].key = k; });
 const FEATURED = ['bigsky', 'heartland'];
 const ALTS = ORDER.filter(k => !FEATURED.includes(k));
