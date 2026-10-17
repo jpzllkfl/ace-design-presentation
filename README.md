@@ -1,11 +1,11 @@
 # A.C.E. Distribution — Website Design Review
 
-Internal leadership deck: five homepage directions (two featured), EOS accountability, and the decision.
+Internal leadership deck, told as an EOS Rock check-in: **Launch the new ACE website**, one owner, four milestones. Milestone 1 is the five homepage directions (two featured), milestone 2 is the decision in the room, and the close is the presenter's own Rocks and To-Dos to drive it to done.
 
 **Two versions, same slides:**
 - **HTML:** `deck/index.html` (the root `index.html` redirects there). Multi-file: keep the `deck/assets/` folder next to it.
 - **Live designs:** `designs/index.html`: all five homepage concepts as full, scrollable sites (plus the booking wizard and Round 2 concepts). Needs internet for photos and fonts.
-- **PowerPoint:** `ACE-Design-Review.pptx`: speaker notes in the Notes pane, sections for Opening / Designs / Accountability / Decision / Appendix. Owner and due-date cells are blank table cells to type into. Fonts are Cambria + Calibri, so it looks the same on any Office install.
+- **PowerPoint:** `ACE-Design-Review.pptx`: speaker notes in the Notes pane, sections for The Rock / Milestone 1 · Designs / Milestone 2 · Decision / Driving it to done / Appendix. Type your name and due dates into the blank Owner and Due cells. Fonts are Cambria + Calibri, so it looks the same on any Office install.
 
 ## Controls
 | | Keyboard | iPad |
@@ -16,7 +16,7 @@ Internal leadership deck: five homepage directions (two featured), EOS accountab
 | Fullscreen | F | Add to Home Screen |
 | Open the live site | W (or the **Open live ↗** button) | Tap **Open live ↗** |
 
-Owner names, due dates and the picked design on slides 16–17 are typed in place and remembered on that device.
+Your name (slide 4), the picked direction (slide 13), and owners and due dates (slides 15 and 17) are typed in place and remembered on that device.
 
 ## Swapping the featured pair
 Default is **Big Sky + Heartland Steel**. To feature any two:
