@@ -79,8 +79,8 @@
   }
   .dark .kicker, .stage-dark .kicker { color: var(--gold); }
   h1, h2, h3 { font-family: var(--serif); font-weight: 600; margin: 0; letter-spacing: -0.02em; }
-  h1 { font-size: 132px; line-height: .98; }
-  h2 { font-size: 92px; line-height: 1.02; max-width: 15ch; }
+  h1 { font-size: 124px; line-height: 1.08; }
+  h2 { font-size: 88px; line-height: 1.1; max-width: 15ch; }
   h3 { font-size: 46px; line-height: 1.1; }
   em { font-style: italic; font-weight: 400; }
   .gold { color: var(--gold); }
@@ -107,7 +107,7 @@
   .dark .points small { color: rgba(245,239,227,.6); }
 
   /* big statement */
-  .statement { font-family: var(--serif); font-weight: 600; font-size: 118px; line-height: 1.02; letter-spacing: -0.025em; max-width: 14ch; margin: 0; }
+  .statement { font-family: var(--serif); font-weight: 600; font-size: 112px; line-height: 1.1; letter-spacing: -0.025em; max-width: 14ch; margin: 0; }
   .attrib { font: 500 20px/1.4 var(--mono); letter-spacing: .18em; text-transform: uppercase; opacity: .55; margin-top: 48px; }
 
   /* two-column */
@@ -244,6 +244,18 @@
   .pick button.chosen .n { color: var(--night); }
   .pick button.chosen .f { opacity: .75; }
 
+  /* tick lists inside the dark duo (Rocks / To-Dos) */
+  .ticks { list-style: none; padding: 0; margin: 0; }
+  .ticks li { position: relative; padding: 0 0 0 40px; margin: 0 0 18px; font-size: 32px; line-height: 1.4; font-weight: 300; color: rgba(245,239,227,.8); }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: 22px; width: 18px; height: 2px; background: var(--gold); }
+
+  /* three-step weekly rhythm */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; margin-top: 96px; }
+  .steps > div { border-top: 2px solid var(--gold); padding-top: 40px; }
+  .steps .n { font: 500 20px/1 var(--mono); letter-spacing: .14em; color: var(--gold-deep); }
+  .steps h3 { font-size: 64px; margin: 24px 0 18px; }
+  .steps p { font-size: 32px; line-height: 1.45; font-weight: 300; color: var(--ink-soft); margin: 0; max-width: 22ch; }
+
   /* Rock card: owner / due / status */
   .rock-meta { display: flex; gap: 72px; margin-top: 48px; align-items: baseline; flex-wrap: wrap; }
   .rock-meta > div { display: flex; flex-direction: column; gap: 14px; }
@@ -335,197 +347,197 @@
 
   <!-- 1 · TITLE -->
   <section class="slide dark center-v" data-title="Title"
-    data-notes="I took the website on as my Rock. This isn't a mockup tour; it's a check-in on something I own.|Four parts: what I took on, what I've delivered, the one decision I need from you, and how I'll finish it.|Keep it short. The room knows the business.">
-    <img src="assets/ace-logo-gold.png" alt="A.C.E. Distribution" style="height:150px;width:auto;align-self:flex-start;margin-bottom:96px" />
-    <p class="kicker">Website design review · Rock check-in</p>
-    <h1>The new ACE website.<br/><em class="gold">My Rock.</em></h1>
-    <p class="lede">What I took on, what’s done, the one decision I need from this room, and how I’ll drive it to launch.</p>
+    data-notes="Two things today, and they belong together: how we create accountability with Rocks, and the website designs that become our first Rock.|Keep the open short. The room knows the business.">
+    <img src="assets/ace-logo-gold.png" alt="A.C.E. Distribution" style="height:150px;width:auto;align-self:flex-start;margin-bottom:88px" />
+    <p class="kicker">Leadership session</p>
+    <h1 style="max-width:18ch">Accountability, Rocks and the new <em class="gold">ACE website.</em></h1>
+    <p class="lede">How we’ll own what we commit to, and the website designs that become our first Rock.</p>
   </section>
 
   <!-- 2 · WHY WE'RE HERE -->
   <section class="slide light" data-title="Why we’re here"
-    data-notes="Three things. If we leave with a direction but no commitments, the meeting didn't do its job.|The site is the first thing a new fleet manager or farm buyer sees before they ever call Pleasanton. That's why it deserves a real decision and a real owner.">
+    data-notes="Two jobs, one outcome. First, how we create accountability. Second, the website designs, and choosing one.|Then we put both together: the website becomes our first Rock, with owners and dates before we stand up.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
     <p class="kicker" style="margin-top:40px">Why we’re here</p>
-    <h2>A Rock check-in, <em>not</em> a mockup tour.</h2>
+    <h2>Two jobs, one outcome.</h2>
     <ol class="points">
-      <li><span class="n">01</span><span>Show what’s done<small>Five website directions, built and live to click through.</small></span></li>
-      <li><span class="n">02</span><span>Make one decision together<small>Which direction we build. Two featured, all five on the table.</small></span></li>
-      <li><span class="n">03</span><span>Commit to the finish<small>My Rocks and this week’s To-Dos, written down before we stand up.</small></span></li>
+      <li><span class="n">01</span><span>Create accountability<small>How we set Rocks, own them, and report on them every week.</small></span></li>
+      <li><span class="n">02</span><span>Present the website designs<small>Five built, two featured, one to choose.</small></span></li>
+      <li><span class="n">03</span><span>Leave with Rocks<small>The website becomes our first Rock: owners and dates before we stand up.</small></span></li>
     </ol>
   </section>
 
-  <!-- 3 · EOS LENS -->
+  <!-- 3 · ONE NAME -->
   <section class="slide dark center-v" data-title="One name on every Rock"
-    data-notes="EOS is blunt on purpose: one name on the Rock. If everyone owns it, no one owns it, and that's how a website stalls for years.|So I'm putting my name on this one, in front of you. Hold me to it.">
+    data-notes="EOS is blunt on purpose: one name on every Rock.|If everyone owns it, no one owns it. That's how good ideas, like a new website, sit for years.|Accountability isn't blame. It's clarity: everyone knows who is driving.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker">The lens · EOS accountability</p>
+    <p class="kicker">Part 1 · Accountability</p>
     <p class="statement">One name<br/>on every <em class="gold">Rock.</em></p>
-    <p class="lede">This one has mine. Accountability isn’t blame. It’s clarity, ownership and follow-through, out loud.</p>
+    <p class="lede">If everyone owns it, no one owns it. Accountability isn’t blame: it’s clarity, ownership and follow-through.</p>
   </section>
 
-  <!-- 4 · THE ROCK -->
-  <section class="slide light" data-title="My Rock"
-    data-notes="This is the Rock: one owner, measurable, done by the end of the quarter.|Four milestones. The first is done: five directions, fully built. The second happens in this room, today.|Every week in our L10 I'll call it on track or off track. No surprises.">
+  <!-- 4 · ROCKS & TO-DOS -->
+  <section class="slide dark" data-title="Rocks and To-Dos"
+    data-notes="Two tools. Rocks are the few things that must be true in 90 days. Measurable, a clear 'done when', one owner.|To-Dos are seven-day promises. Done by next week, or flagged early.|Both are commitments: to the team, and to yourself.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">My Rock · this quarter</p>
+    <p class="kicker" style="margin-top:40px">Part 1 · The tools</p>
+    <h2 style="max-width:none">Rocks and To-Dos.</h2>
+    <div class="duo">
+      <div>
+        <div class="big">Rocks</div>
+        <div class="meta">90 days</div>
+        <ul class="ticks">
+          <li>A few per person, not a wish list</li>
+          <li>Measurable, with a clear “done when”</li>
+          <li>One owner, always</li>
+        </ul>
+      </div>
+      <div>
+        <div class="big">To-Dos</div>
+        <div class="meta">7 days</div>
+        <ul class="ticks">
+          <li>Short, specific promises</li>
+          <li>Done by next week’s L10</li>
+          <li>Or flagged early, never quietly late</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · THE RHYTHM -->
+  <section class="slide light" data-title="The weekly rhythm"
+    data-notes="This is what makes it real: a weekly rhythm.|Set: every Rock gets one owner and a done-when.|Report: every L10, each owner says on track or off track. One word, no stories.|Resolve: if it's off track, it goes to the issues list and we solve it together.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">Part 1 · The rhythm</p>
+    <h2 style="max-width:none">Every week, out loud.</h2>
+    <div class="steps">
+      <div><span class="n">01</span><h3>Set</h3><p>Every Rock gets one owner and a clear “done when.”</p></div>
+      <div><span class="n">02</span><h3>Report</h3><p>Every L10: on track or off track. One word, no stories.</p></div>
+      <div><span class="n">03</span><h3>Resolve</h3><p>Off track goes on the issues list, and we solve it as a team.</p></div>
+    </div>
+  </section>
+
+  <!-- 6 · DRIVE -->
+  <section class="slide dark center-v" data-title="Drive"
+    data-notes="This is the personal one. You're accountable for the things you give yourself.|Ambition without ownership is noise. Everyone here has had a 'we should redo the website' moment. You don't get credit for the intention. You get credit for the finish.|Which brings us to the website.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker">Part 1 · Drive</p>
+    <p class="statement">Finish what you <em class="gold">give yourself.</em></p>
+    <p class="lede">Ambition without ownership is noise. Credit goes to the finish, not the intention.</p>
+  </section>
+
+  <!-- 7 · OUR FIRST ROCK -->
+  <section class="slide light" data-title="Our first Rock"
+    data-notes="Here's where the two jobs meet. The website is our first Rock, run exactly the way we just described.|Four milestones. The first is already done: five directions, fully built. The second happens in this room, today.|From here on it gets reported in L10 like every other Rock.">
+    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
+    <p class="kicker" style="margin-top:40px">Part 2 · Our first Rock</p>
     <h2 style="max-width:none">Launch the new ACE website.</h2>
     <div class="rock-meta">
-      <div><span class="label">Owner</span><span class="fill" contenteditable="true" data-key="rockOwner" data-placeholder="Your name"></span></div>
+      <div><span class="label">Owner</span><span class="fill" contenteditable="true" data-key="rockOwner" data-placeholder="Name"></span></div>
       <div><span class="label">Done by</span><span class="fill" contenteditable="true" data-key="rockDue" data-default="End of quarter" data-placeholder="Date" style="min-width:220px"></span></div>
       <div><span class="label">Status</span><span class="status">On track</span></div>
     </div>
     <div class="track" data-at="2"></div>
   </section>
 
-  <!-- 5 · FIVE DIRECTIONS -->
-  <section class="slide dark" data-title="Milestone 1 · five directions" id="s-five"
+  <!-- 8 · FIVE DIRECTIONS -->
+  <section class="slide dark" data-title="Five directions" id="s-five"
     data-notes="Milestone one is done. Five directions, built end to end: homepage, services, booking. Not mood boards. Every one is live, and I can open any of them right now.|The two highlighted are the ones I want us to sit with. The other three are real alternates.|Try this with each one: cover the logo for two seconds. Does it still feel like ACE?">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">Milestone 1 · delivered</p>
+    <p class="kicker" style="margin-top:40px">Part 2 · The designs</p>
     <h2>Five directions, built.<br/><em class="gold">Two</em> to sit with.</h2>
     <div class="five" id="five-strip"></div>
-    <span class="rock-chip done">My Rock · milestone 1 of 4 ✓</span>
+    <span class="rock-chip done">Website Rock · milestone 1 of 4 ✓</span>
   </section>
 
-  <!-- 6–9 · FEATURED A / B (rendered from data) -->
+  <!-- 9–12 · FEATURED A / B (rendered from data) -->
   <section class="slide stage-dark" data-feature="0" data-kind="show" data-title="Featured A"></section>
   <section class="slide light" data-feature="0" data-kind="why" data-title="Featured A · why"></section>
   <section class="slide stage-dark" data-feature="1" data-kind="show" data-title="Featured B"></section>
   <section class="slide light" data-feature="1" data-kind="why" data-title="Featured B · why"></section>
 
-  <!-- 10 · OTHER THREE -->
+  <!-- 13 · OTHER THREE -->
   <section class="slide light" data-title="The other three"
     data-notes="Not throwaways. Each one is complete and any of them could ship.|If someone in the room is pulling for one of these, say so now and we'll swap it into the final two.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">Also delivered</p>
+    <p class="kicker" style="margin-top:40px">Part 2 · Also built</p>
     <h2 style="max-width:none">The other three.</h2>
     <div class="three" id="three-grid"></div>
-    <span class="rock-chip done">My Rock · milestone 1 of 4 ✓</span>
+    <span class="rock-chip done">Website Rock · milestone 1 of 4 ✓</span>
   </section>
 
-  <!-- 11 · ALL FIVE COMPARISON -->
+  <!-- 14 · ALL FIVE COMPARISON -->
   <section class="slide light" data-title="Side by side"
     data-notes="One line each, so we're comparing the same things: feeling, who it speaks to, what to watch for.|The watch-out column is where the real conversation is.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">All five, side by side</p>
+    <p class="kicker" style="margin-top:40px">Part 2 · All five, side by side</p>
     <table class="compare" id="compare">
       <thead><tr><th style="padding-left:20px">Direction</th><th>Feeling</th><th>Speaks to</th><th>Watch out for</th></tr></thead>
       <tbody></tbody>
     </table>
-    <span class="rock-chip done">My Rock · milestone 1 of 4 ✓</span>
+    <span class="rock-chip done">Website Rock · milestone 1 of 4 ✓</span>
   </section>
 
-  <!-- 12 · BOOKING -->
+  <!-- 15 · BOOKING -->
   <section class="slide light" data-title="Booking"
     data-notes="One slide on this. Whichever direction we choose, the booking matrix already matches it.|It turns a visit into a scheduled delivery window. That's what makes the site work for ACE, not just look good.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">Built in, not bolted on</p>
+    <p class="kicker" style="margin-top:40px">Part 2 · Built in, not bolted on</p>
     <h2 style="max-width:22ch">Every direction books deliveries, in its own colors.</h2>
     <div class="mstrip" id="mstrip"></div>
-    <span class="rock-chip done">My Rock · milestone 1 of 4 ✓</span>
+    <span class="rock-chip done">Website Rock · milestone 1 of 4 ✓</span>
   </section>
 
-  <!-- 13 · DECISION -->
-  <section class="slide dark" data-title="Milestone 2 · decision"
-    data-notes="Ask it plainly: which direction do we build?|Tap a card to mark the pick.|If the room splits, land on two and name who makes the final call by when. That's a To-Do, not a maybe.">
+  <!-- 16 · DECISION -->
+  <section class="slide dark" data-title="Decision"
+    data-notes="Milestone two. Ask it plainly: which direction do we build?|Tap a card to mark the pick.|If the room splits, land on two and name who makes the final call by when. That's a To-Do, not a maybe.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">Milestone 2 · today</p>
+    <p class="kicker" style="margin-top:40px">Part 3 · Decide</p>
     <h2 style="max-width:none">Which direction do we build?</h2>
     <div class="pick" id="pick"></div>
     <p class="lede" style="margin-top:56px">If we can’t land on one, we land on two, and name who makes the final call by when.</p>
-    <span class="rock-chip now">My Rock · milestone 2 of 4 · today</span>
+    <span class="rock-chip now">Website Rock · milestone 2 of 4 · today</span>
   </section>
 
-  <!-- 14 · ONE SEAT -->
-  <section class="slide dark" data-title="One seat, one name"
-    data-notes="Choosing a direction is milestone two of four. The rest is ownership.|In EOS every seat has one person accountable. The Accountability Chart names who owns which outcome, not who reports to whom. For the website, that's me.|Accountability isn't blame. It's clarity, so nobody has to guess who's driving.">
+  <!-- 17 · WEBSITE ROCKS -->
+  <section class="slide light" data-title="The website Rocks"
+    data-notes="Now we do what Part 1 described. Three Rocks for the website, each with a done-when.|One name on each, and a date. Fill them in right here, in the room.|From next week, each owner reports on track or off track in L10.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">From choosing to finishing</p>
-    <p class="statement" style="font-size:104px;max-width:16ch">If everyone owns it, <em class="gold">no one</em> owns it.</p>
-    <div class="cols" style="margin-top:auto">
-      <div class="col">
-        <div class="label">My seat</div>
-        <p>I own the website Rock: the build, the booking flow, the launch. One name, so nobody wonders who’s driving.</p>
-      </div>
-      <div class="col">
-        <div class="label">What I need from you</div>
-        <p>Decisions when I ask, content and photos on time, and straight answers in L10 when I’m off track.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 15 · MY ROCKS -->
-  <section class="slide light" data-title="My Rocks"
-    data-notes="These are my Rocks for the quarter. Few, important, measurable.|Each one has a 'done when', so there's no arguing later about whether it's finished.|They're mine. I'm giving them to myself, in front of you.">
-    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">Milestones 3 and 4 · my Rocks</p>
-    <h2 style="max-width:none">Three Rocks I’m giving myself.</h2>
+    <p class="kicker" style="margin-top:40px">Part 3 · Commit</p>
+    <h2 style="max-width:none">The website Rocks.</h2>
     <table class="own">
-      <thead><tr><th style="width:72%">Rock · done when</th><th>Due</th></tr></thead>
+      <thead><tr><th style="width:58%">Rock · done when</th><th style="width:24%">Owner</th><th>Due</th></tr></thead>
       <tbody>
-        <tr><td class="what">Launch the site in the chosen direction<small>Live on the domain, checked on phones, real photos.</small></td><td><span class="fill" contenteditable="true" data-key="rock1d" data-placeholder="Date" style="min-width:200px"></span></td></tr>
-        <tr><td class="what">Booking flow taking real requests<small>Matrix live, requests landing with whoever confirms delivery windows.</small></td><td><span class="fill" contenteditable="true" data-key="rock2d" data-placeholder="Date" style="min-width:200px"></span></td></tr>
-        <tr><td class="what">Content &amp; photos approved<small>Services, coverage and contact: written, approved, published.</small></td><td><span class="fill" contenteditable="true" data-key="rock3d" data-placeholder="Date" style="min-width:200px"></span></td></tr>
+        <tr><td class="what">Launch the site in the chosen direction<small>Live on the domain, checked on phones, real photos.</small></td><td><span class="fill" contenteditable="true" data-key="rock1o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="rock1d" data-placeholder="Date" style="min-width:170px"></span></td></tr>
+        <tr><td class="what">Booking flow taking real requests<small>Matrix live, requests landing with whoever confirms delivery windows.</small></td><td><span class="fill" contenteditable="true" data-key="rock2o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="rock2d" data-placeholder="Date" style="min-width:170px"></span></td></tr>
+        <tr><td class="what">Content &amp; photos approved<small>Services, coverage and contact: written, approved, published.</small></td><td><span class="fill" contenteditable="true" data-key="rock3o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="rock3d" data-placeholder="Date" style="min-width:170px"></span></td></tr>
       </tbody>
     </table>
-    <span class="rock-chip">Owner on all three: me</span>
   </section>
 
-  <!-- 16 · HOW I'LL DRIVE IT -->
-  <section class="slide dark" data-title="How I’ll drive it"
-    data-notes="Rocks are the 90-day commitments. I'll call mine on track or off track every week in L10.|To-Dos are seven-day promises. Done, or flagged early.|Same standard for what I give myself as for what I give the team.">
-    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">How I’ll drive it</p>
-    <h2 style="max-width:none">What I say, I do.</h2>
-    <div class="duo">
-      <div>
-        <div class="big">Rocks</div>
-        <div class="meta">90 days · mine · on track or off</div>
-        <p>Reported every week in L10: on track or off track.</p>
-        <p>Off track means I bring the issue, not an excuse.</p>
-      </div>
-      <div>
-        <div class="big">To-Dos</div>
-        <div class="meta">7 days · short · specific</div>
-        <p>This week’s promises, done in seven days.</p>
-        <p>Or I flag it early. Never quietly late.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 17 · THIS WEEK -->
+  <!-- 18 · THIS WEEK -->
   <section class="slide light" data-title="This week’s To-Dos"
-    data-notes="Four To-Dos, seven days.|Three are mine. One is yours: photos and copy. Put a name on it before we stand up.">
+    data-notes="Seven-day promises to get the Rocks moving.|Put a name and a date on every line before anyone stands up. Read them back at the end.">
     <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker" style="margin-top:40px">After today · To-Dos</p>
-    <h2 style="max-width:none">This week.</h2>
+    <p class="kicker" style="margin-top:40px">Part 3 · This week</p>
+    <h2 style="max-width:none">This week’s To-Dos.</h2>
     <table class="own" style="font-size:30px">
       <thead><tr><th style="width:56%">To-Do</th><th style="width:24%">Owner</th><th>Due</th></tr></thead>
       <tbody>
-        <tr><td class="what">Confirm the chosen direction in writing</td><td><span class="fill" contenteditable="true" data-key="todo1o" data-default="Me" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo1d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
-        <tr><td class="what">Kick off the build in that direction</td><td><span class="fill" contenteditable="true" data-key="todo2o" data-default="Me" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo2d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
-        <tr><td class="what">Send the content &amp; photo list to the team</td><td><span class="fill" contenteditable="true" data-key="todo3o" data-default="Me" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo3d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
-        <tr><td class="what">Get photos &amp; copy back to me</td><td><span class="fill" contenteditable="true" data-key="todo4o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo4d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+        <tr><td class="what">Confirm the chosen direction in writing</td><td><span class="fill" contenteditable="true" data-key="todo1o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo1d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+        <tr><td class="what">Kick off the build in that direction</td><td><span class="fill" contenteditable="true" data-key="todo2o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo2d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+        <tr><td class="what">Send the content &amp; photo list to owners</td><td><span class="fill" contenteditable="true" data-key="todo3o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo3d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
+        <tr><td class="what">Return photos &amp; copy</td><td><span class="fill" contenteditable="true" data-key="todo4o" data-placeholder="Name"></span></td><td><span class="fill" contenteditable="true" data-key="todo4d" data-placeholder="Date" style="min-width:160px"></span></td></tr>
       </tbody>
     </table>
-  </section>
-
-  <!-- 18 · DRIVE -->
-  <section class="slide dark center-v" data-title="Drive"
-    data-notes="This is the personal one. You're accountable for the things you give yourself.|Ambition without ownership is noise. Everyone in this room has had a 'we should redo the website' moment. You don't get credit for the intention. You get credit for the finish.">
-    <img class="chrome-logo" src="assets/ace-logo-gold.png" alt="" />
-    <p class="kicker">Drive</p>
-    <p class="statement">Finish what you <em class="gold">gave yourself.</em></p>
-    <p class="lede">I gave myself this Rock. You’ll hear it called on track or off track every week until it’s live.</p>
   </section>
 
   <!-- 19 · CLOSE -->
   <section class="slide dark center-v" data-title="Close"
-    data-notes="Close on the commitment, not the design. Read the To-Do names back.|Then: you'll hear this Rock's status every week until it's live.">
-    <img src="assets/ace-logo-gold.png" alt="A.C.E. Distribution" style="height:110px;width:auto;align-self:flex-start;margin-bottom:90px" />
+    data-notes="Close on the commitment, not the design. Read the Rock owners and To-Do names back.|Then: we'll hear where every Rock stands, every week in L10, until the site is live.">
+    <img src="assets/ace-logo-gold.png" alt="A.C.E. Distribution" style="height:96px;width:auto;align-self:flex-start;margin-bottom:64px" />
     <p class="statement">Own it.<br/><em class="gold">Finish it.</em></p>
-    <p class="lede">Direction chosen. Rocks set. Next check-in: our L10.</p>
+    <p class="lede">Rocks set. Owners named. Every week in L10, we’ll hear where they stand.</p>
     <div class="track compact" data-at="3"></div>
   </section>
 

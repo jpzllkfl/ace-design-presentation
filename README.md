@@ -1,11 +1,11 @@
-# A.C.E. Distribution — Website Design Review
+# A.C.E. Distribution — Accountability, Rocks and the New Website
 
-Internal leadership deck, told as an EOS Rock check-in: **Launch the new ACE website**, one owner, four milestones. Milestone 1 is the five homepage directions (two featured), milestone 2 is the decision in the room, and the close is the presenter's own Rocks and To-Dos to drive it to done.
+Internal leadership deck in three parts: **(1) creating accountability** with EOS Rocks and To-Dos, **(2) the website designs**: five homepage directions, two featured, and **(3) deciding and committing**: the website becomes the team's first Rock, with owners and dates set in the room.
 
 **Two versions, same slides:**
 - **HTML:** `deck/index.html` (the root `index.html` redirects there). Multi-file: keep the `deck/assets/` folder next to it.
 - **Live designs:** `designs/index.html`: all five homepage concepts as full, scrollable sites (plus the booking wizard and Round 2 concepts). Needs internet for photos and fonts.
-- **PowerPoint:** `ACE-Design-Review.pptx`: speaker notes in the Notes pane, sections for The Rock / Milestone 1 · Designs / Milestone 2 · Decision / Driving it to done / Appendix. Type your name and due dates into the blank Owner and Due cells. Fonts are Cambria + Calibri, so it looks the same on any Office install.
+- **PowerPoint:** `ACE-Design-Review.pptx`: speaker notes in the Notes pane, sections for Part 1 · Accountability / Part 2 · The website designs / Part 3 · Decide and commit / Appendix. Type names and dates into the blank Owner and Due cells. Fonts are Cambria + Calibri, so it looks the same on any Office install.
 
 ## Controls
 | | Keyboard | iPad |
@@ -16,7 +16,7 @@ Internal leadership deck, told as an EOS Rock check-in: **Launch the new ACE web
 | Fullscreen | F | Add to Home Screen |
 | Open the live site | W (or the **Open live ↗** button) | Tap **Open live ↗** |
 
-Your name (slide 4), the picked direction (slide 13), and owners and due dates (slides 15 and 17) are typed in place and remembered on that device.
+The website Rock's owner (slide 7), the picked direction (slide 16), and owners and due dates (slides 17 and 18) are typed in place and remembered on that device.
 
 ## Swapping the featured pair
 Default is **Big Sky + Heartland Steel**. To feature any two:

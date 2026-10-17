@@ -1,61 +1,55 @@
-# ACE Website — Speaker Notes
+# Accountability, Rocks and the New ACE Website — Speaker Notes
 
 Press **N** in the HTML deck to see these notes on screen (two-finger tap on iPad). In PowerPoint they're in the Notes pane.
-Slide numbers match the default pair: **Big Sky + Heartland Steel**.
+Slide numbers match the default featured pair: **Big Sky + Heartland Steel**.
 
 ---
 
-## The thread
-The whole talk is one EOS Rock, with your name on it: **Launch the new ACE website.**
-It has four milestones, and the deck walks through them in order:
+## How the talk is built
+Two jobs, one outcome:
+1. **Create accountability**: what Rocks and To-Dos are, and how we run them every week.
+2. **Present the website designs**: five built, two featured, one to choose.
 
-1. **Five directions built**: done. (The design slides are the proof.)
-2. **Choose the direction**: today, in this room.
-3. **Build + booking live**: next.
-4. **Launch**: done when it's live.
-
-The milestone tracker appears on the Rock slide and again at the close, and a small **My Rock** marker sits on every design slide, so the room never loses the thread.
+They meet in the middle: **the website becomes our first Rock** (Launch the new ACE website), with four milestones:
+designs built ✓ → choose the direction (today) → build + booking live → launch.
+The milestone tracker shows on slide 7 and again at the close. A small "Website Rock" marker sits on the design slides, so the room never loses the thread.
 
 ## Why this pair
-**Big Sky** (warm heritage) and **Heartland Steel** (bold industrial) make the same promise at two volumes: "family company that delivers." Big Sky leans on legacy and trust. Heartland leans on operations and grit. Both work with the gold mark: Big Sky's palette *is* the mark, and Heartland's dark stage makes it pop.
+**Big Sky** (warm heritage) and **Heartland Steel** (bold industrial) make the same promise at two volumes: "family company that delivers." Big Sky leans on legacy and trust; Heartland on operations and grit. Both work with the gold mark.
 Side by side, they force the real question: **do we lead with who we are, or with what we haul?**
 
-**Live sites:** press **W** on any design slide (or tap **Open live ↗**) to scroll the real page. `designs/index.html` lists all five.
+**Live sites:** press **W** on any design slide (or tap **Open live ↗**) to scroll the real page. To feature a different pair in the HTML deck, add `?pair=piney,openwater` (names: `bigsky`, `piney`, `openwater`, `heartland`, `hill`).
 
-To feature a different pair, open the HTML deck with `?pair=` and two names, e.g. `deck/index.html?pair=piney,openwater`.
-Names: `bigsky`, `piney`, `openwater`, `heartland`, `hill`.
-
-## Before the meeting
-- Type your name in **Owner** on slide 4 (My Rock).
-- Fill the **Due** dates on slide 15 (My Rocks) and slide 17 (This week).
+## In the room
+- **Slide 7:** type the website Rock's owner.
+- **Slide 16:** tap the chosen direction.
+- **Slides 17 and 18:** type owners and due dates for every Rock and To-Do before anyone stands up.
 
 ---
 
-## The Rock
-1. **Title.** "I took the website on as my Rock. This isn't a mockup tour; it's a check-in on something I own." Four parts: what I took on, what I've delivered, the one decision I need, how I'll finish it.
-2. **Why we're here.** Three things: show what's done, make one decision together, commit to the finish. "If we leave with a direction but no commitments, the meeting didn't do its job."
-3. **One name on every Rock.** "EOS is blunt on purpose. If everyone owns it, no one owns it, and that's how a website stalls for years. So I'm putting my name on this one, in front of you. Hold me to it."
-4. **My Rock.** Launch the new ACE website: owner, done by end of quarter, on track. Walk the four milestones: "The first is done. The second happens in this room, today. Every week in L10 I'll call it on track or off track. No surprises."
+## Part 1 · Accountability
+1. **Title.** Two things today, and they belong together: how we create accountability with Rocks, and the website designs that become our first Rock.
+2. **Two jobs, one outcome.** Create accountability. Present the website designs. Leave with Rocks: owners and dates before we stand up.
+3. **One name on every Rock.** "EOS is blunt on purpose. If everyone owns it, no one owns it. That's how good ideas, like a new website, sit for years. Accountability isn't blame. It's clarity."
+4. **Rocks and To-Dos.** Rocks: 90 days, a few per person, measurable with a clear "done when", one owner. To-Dos: seven-day promises, done by next week's L10 or flagged early.
+5. **Every week, out loud.** Set: one owner and a done-when. Report: every L10, on track or off track, one word, no stories. Resolve: off track goes on the issues list and we solve it as a team.
+6. **Finish what you give yourself.** "You're accountable for the things you give yourself. Ambition without ownership is noise. You don't get credit for the intention. You get credit for the finish." Then: "Which brings us to the website."
 
-## Milestone 1: the designs (delivered)
-5. **Five directions, built.** "Milestone one is done. Five directions, built end to end: homepage, services, booking. Not mood boards. Every one is live." Ask the room to cover the logo for two seconds on each: does it still feel like ACE?
-6. **Big Sky (showcase).** One sentence: a family company that's been doing this right for a long time. Let the slide sit, or press W and scroll it live.
-7. **Big Sky (why).** The gold is ours. The editorial serif reads established, not corporate. "Delivered like family" carries the promise. Watch: can read soft to fleet buyers.
-8. **Heartland Steel (showcase).** Heavy-duty product and people who answer the phone. Same promise as Big Sky, louder.
-9. **Heartland Steel (why).** Built for the buyer who runs trucks. The dark stage makes the mark pop. Most distinct in the market. Watch: loudest option, and the orange moves toward our gold in the build.
-10. **The other three.** Not throwaways. Any of them could ship. If someone's pulling for one, swap it into the final two.
-11. **Side by side.** Feeling, who it speaks to, what to watch for. The watch-out column is where the real conversation is.
-12. **Booking.** "Whichever direction we choose, the booking matrix already matches it. It turns a visit into a scheduled delivery window."
+## Part 2 · The website designs
+7. **Our first Rock: Launch the new ACE website.** "Here's where the two jobs meet. The website is our first Rock, run exactly the way we just described. Milestone one is already done. Milestone two happens in this room, today."
+8. **Five directions, built.** Built end to end: homepage, services, booking. Every one is live. Two highlighted to sit with. Ask the room to cover the logo for two seconds: does it still feel like ACE?
+9. **Big Sky (showcase).** A family company that's been doing this right for a long time. Let it sit, or press W and scroll it live.
+10. **Big Sky (why).** The gold is ours. Editorial serif reads established, not corporate. "Delivered like family" carries the promise. Watch: can read soft to fleet buyers.
+11. **Heartland Steel (showcase).** Heavy-duty product and people who answer the phone. Same promise as Big Sky, louder.
+12. **Heartland Steel (why).** Built for the buyer who runs trucks. The dark stage makes the mark pop. Most distinct in the market. Watch: loudest option; the orange moves toward our gold in the build.
+13. **The other three.** Not throwaways. Any could ship. If someone's pulling for one, swap it into the final two.
+14. **Side by side.** Feeling, who it speaks to, what to watch for. The watch-out column is where the real conversation is.
+15. **Booking.** Whichever direction we choose, the booking matrix already matches it. It turns a visit into a scheduled delivery window.
 
-## Milestone 2: the decision (today)
-13. **Which direction do we build?** Ask it plainly. Tap a card to mark the pick. If the room splits, land on two and name who makes the final call by when: "That's a To-Do, not a maybe."
+## Part 3 · Decide and commit
+16. **Which direction do we build?** Milestone two. Ask it plainly. Tap the pick. If the room splits, land on two and name who makes the final call by when: "That's a To-Do, not a maybe."
+17. **The website Rocks.** "Now we do what Part 1 described." Launch the site; booking taking real requests; content and photos approved. One name and a date on each, typed in the room. From next week, each owner reports on track or off track in L10.
+18. **This week's To-Dos.** Seven-day promises to get the Rocks moving. A name and a date on every line before anyone stands up.
+19. **Own it. Finish it.** Read the Rock owners and To-Do names back. "We'll hear where every Rock stands, every week in L10, until the site is live."
 
-## Driving it to done
-14. **If everyone owns it, no one owns it.** "Choosing a direction is milestone two of four. The rest is ownership." My seat: the build, the booking flow, the launch. What I need from you: decisions when I ask, content and photos on time, straight answers in L10 when I'm off track.
-15. **Three Rocks I'm giving myself.** Launch the site; booking taking real requests; content and photos approved. Each has a "done when", so nobody argues later about whether it's finished. "They're mine. I'm giving them to myself, in front of you."
-16. **What I say, I do.** Rocks: 90 days, called on track or off track every week in L10; off track means I bring the issue, not an excuse. To-Dos: seven days, done or flagged early.
-17. **This week.** Four To-Dos. Three are mine; one is the team's (photos and copy). Put a name on it before anyone stands up.
-18. **Finish what you gave yourself.** "You're accountable for the things you give yourself. Ambition without ownership is noise. You don't get credit for the intention to rebuild the site. You get credit for the finish."
-19. **Own it. Finish it.** Read the To-Do names back. "Direction chosen. Rocks set. You'll hear this Rock's status every week in L10 until it's live."
-
-**Appendix (20–23).** Full-size views of the three alternates, each with an Open live link, for when the room wants to swap one in.
+**Appendix (20–23).** Full-size views of the three alternates, each with an Open live link.

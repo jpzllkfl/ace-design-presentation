@@ -143,7 +143,7 @@ const HERO_RATIO = 1100 / 644;
       smallLogo('deck/assets/ace-logo-gold.png'),
       { placeholder: { options: { name: 'kicker', type: 'body', align: 'left', x: L, y: 2.15, w: CW, h: 0.35, fontSize: 11, bold: true, charSpacing: 3, color: C.accent1, margin: 0, valign: 'top' }, text: '' } },
       { placeholder: { options: { name: 'title', type: 'title', align: 'left', x: L, y: 2.55, w: 9.6, h: 2.3, fontFace: THEME.headFontFace, fontSize: 58, bold: true, color: C.background2, margin: 0, valign: 'top' }, text: '' } },
-      { placeholder: { options: { name: 'body', type: 'body', align: 'left', x: L, y: 5.0, w: 8.2, h: 1.0, fontSize: 18, color: 'BDB4A2', margin: 0, valign: 'top' }, text: '' } }
+      { placeholder: { options: { name: 'body', type: 'body', align: 'left', x: L, y: 5.0, w: 9.8, h: 1.0, fontSize: 18, color: 'BDB4A2', margin: 0, valign: 'top' }, text: '' } }
     ],
     slideNumber: numDark
   });
@@ -257,52 +257,99 @@ const HERO_RATIO = 1100 / 644;
       fill: now ? { color: HEX.accent1 } : undefined, line: { color: now ? HEX.accent1 : (dark ? HEX.accent2 : 'CDB68A'), width: 0.75 }, objectName: 'rock marker'
     });
   }
-  const M1 = 'My Rock · milestone 1 of 4 ✓';
 
-  // ================= THE ROCK =================
-  pres.addSection({ title: 'The Rock' });
+  const M1 = 'Website Rock · milestone 1 of 4 ✓';
+  const P1 = 'Part 1 · Accountability', P2 = 'Part 2 · The website designs', P3 = 'Part 3 · Decide and commit';
 
-  let s = pres.addSlide({ masterName: 'ACE Title', sectionTitle: 'The Rock' });
-  s.addImage({ path: A('deck/assets/ace-logo-gold.png'), x: L, y: 1.05, w: 1.0 * LOGO_RATIO, h: 1.0, altText: 'A.C.E. Distribution', objectName: 'title logo' });
-  tb(s, 'WEBSITE DESIGN REVIEW · ROCK CHECK-IN', { x: L, y: 2.95, w: CW, h: 0.35, fontSize: 12, bold: true, charSpacing: 3, color: C.accent1 });
+  // ================= PART 1: ACCOUNTABILITY =================
+  pres.addSection({ title: P1 });
+
+  let s = pres.addSlide({ masterName: 'ACE Title', sectionTitle: P1 });
+  s.addImage({ path: A('deck/assets/ace-logo-gold.png'), x: L, y: 0.95, w: 1.0 * LOGO_RATIO, h: 1.0, altText: 'A.C.E. Distribution', objectName: 'title logo' });
+  tb(s, 'LEADERSHIP SESSION', { x: L, y: 2.75, w: CW, h: 0.35, fontSize: 12, bold: true, charSpacing: 3, color: C.accent1 });
   tb(s, [
-    { text: 'The new ACE website.', options: { breakLine: true } },
-    { text: 'My Rock.', options: { italic: true, bold: false, color: C.accent1 } }
-  ], { x: L, y: 3.35, w: CW, h: 2.1, fontFace: THEME.headFontFace, fontSize: 60, bold: true, color: C.background2, lineSpacingMultiple: 0.95 });
-  tb(s, 'What I took on, what’s done, the one decision I need from this room, and how I’ll drive it to launch.', { x: L, y: 5.65, w: 8.4, h: 0.8, fontSize: 18, color: 'BDB4A2' });
-  s.addNotes(notes('I took the website on as my Rock. This isn’t a mockup tour; it’s a check-in on something I own.|Four parts: what I took on, what I’ve delivered, the one decision I need from you, and how I’ll finish it.|Keep it short. The room knows the business.'));
+    { text: 'Accountability, Rocks and', options: { breakLine: true } },
+    { text: 'the new ' },
+    { text: 'ACE website.', options: { italic: true, bold: false, color: C.accent1 } }
+  ], { x: L, y: 3.15, w: CW, h: 2.2, fontFace: THEME.headFontFace, fontSize: 54, bold: true, color: C.background2, lineSpacingMultiple: 1.0 });
+  tb(s, 'How we’ll own what we commit to, and the website designs that become our first Rock.', { x: L, y: 5.6, w: 9.8, h: 0.8, fontSize: 18, color: 'BDB4A2' });
+  s.addNotes(notes('Two things today, and they belong together: how we create accountability with Rocks, and the website designs that become our first Rock.|Keep the open short. The room knows the business.'));
 
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'The Rock' });
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P1 });
   kicker(s, 'Why we’re here');
-  s.addText([{ text: 'A Rock check-in, ' }, { text: 'not', options: { italic: true, bold: false } }, { text: ' a mockup tour' }], { placeholder: 'title' });
+  s.addText('Two jobs, one outcome', { placeholder: 'title' });
   [
-    ['01', 'Show what’s done', 'Five website directions, built and live to click through.'],
-    ['02', 'Make one decision together', 'Which direction we build. Two featured, all five on the table.'],
-    ['03', 'Commit to the finish', 'My Rocks and this week’s To-Dos, written down before we stand up.']
+    ['01', 'Create accountability', 'How we set Rocks, own them, and report on them every week.'],
+    ['02', 'Present the website designs', 'Five built, two featured, one to choose.'],
+    ['03', 'Leave with Rocks', 'The website becomes our first Rock: owners and dates before we stand up.']
   ].forEach(([n, t, sub], i) => {
-    const y = 3.0 + i * 1.15;
+    const y = 2.85 + i * 1.15;
     hRule(s, L, y, 9.7, C.accent4, 'row rule ' + (i + 1));
     tb(s, n, { x: L, y: y + 0.32, w: 0.6, h: 0.3, fontSize: 12, bold: true, color: C.accent2, charSpacing: 2 });
     tb(s, [{ text: t, options: { fontSize: 21, color: C.text1, breakLine: true } }, { text: sub, options: { fontSize: 14, color: C.accent3 } }],
       { x: L + 0.75, y: y + 0.25, w: 8.9, h: 0.8 });
   });
-  hRule(s, L, 3.0 + 3 * 1.15, 9.7, C.accent4, 'row rule end');
-  s.addNotes(notes('Three things. If we leave with a direction but no commitments, the meeting didn’t do its job.|The site is the first thing a new fleet manager or farm buyer sees before they ever call Pleasanton. That’s why it deserves a real decision and a real owner.'));
+  hRule(s, L, 2.85 + 3 * 1.15, 9.7, C.accent4, 'row rule end');
+  s.addNotes(notes('Two jobs, one outcome. First, how we create accountability. Second, the website designs, and choosing one.|Then we put both together: the website becomes our first Rock, with owners and dates before we stand up.'));
 
-  s = pres.addSlide({ masterName: 'ACE Statement', sectionTitle: 'The Rock' });
-  kicker(s, 'The lens · EOS accountability');
-  s.addText([{ text: 'One name on every ' }, { text: 'Rock', options: { italic: true, bold: false, color: C.accent1 } }], { placeholder: 'title' });
-  s.addText('This one has mine. Accountability isn’t blame. It’s clarity, ownership and follow-through, out loud.', { placeholder: 'body' });
-  s.addNotes(notes('EOS is blunt on purpose: one name on the Rock. If everyone owns it, no one owns it, and that’s how a website stalls for years.|So I’m putting my name on this one, in front of you. Hold me to it.'));
+  s = pres.addSlide({ masterName: 'ACE Statement', sectionTitle: P1 });
+  kicker(s, 'Part 1 · Accountability');
+  s.addText([{ text: 'One name', options: { breakLine: true } }, { text: 'on every ' }, { text: 'Rock', options: { italic: true, bold: false, color: C.accent1 } }], { placeholder: 'title' });
+  s.addText([{ text: 'If everyone owns it, no one owns it.', options: { breakLine: true } }, { text: 'Accountability isn’t blame: it’s clarity, ownership and follow-through.' }], { placeholder: 'body' });
+  s.addNotes(notes('EOS is blunt on purpose: one name on every Rock.|If everyone owns it, no one owns it. That’s how good ideas, like a new website, sit for years.|Accountability isn’t blame. It’s clarity: everyone knows who is driving.'));
 
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'The Rock' });
-  kicker(s, 'My Rock · this quarter');
+  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: P1 });
+  kicker(s, 'Part 1 · The tools');
+  s.addText('Rocks and To-Dos', { placeholder: 'title' });
+  {
+    const colW = CW / 2;
+    hRule(s, L, 2.75, CW, '3A3226', 'top rule');
+    s.addShape(pres.shapes.LINE, { objectName: 'divider', x: L + colW, y: 2.75, w: 0, h: 3.7, line: { color: '3A3226', width: 0.75 } });
+    [['Rocks', '90 DAYS', ['A few per person, not a wish list', 'Measurable, with a clear “done when”', 'One owner, always']],
+     ['To-Dos', '7 DAYS', ['Short, specific promises', 'Done by next week’s L10', 'Or flagged early, never quietly late']]].forEach(([h, m, ps], i) => {
+      const x = L + i * colW + (i ? 0.55 : 0), w = colW - 0.55;
+      tb(s, h, { x, y: 3.1, w, h: 0.8, fontFace: THEME.headFontFace, fontSize: 40, bold: true, color: C.background2 });
+      tb(s, m, { x, y: 3.95, w, h: 0.3, fontSize: 11, bold: true, charSpacing: 3, color: C.accent1 });
+      tb(s, ps.map((p, j) => ({ text: p, options: { bullet: { code: '2014', indent: 30 }, breakLine: j < ps.length - 1 } })),
+        { x, y: 4.45, w, h: 1.8, fontSize: 18, color: 'D9D1C1', paraSpaceAfter: 10 });
+    });
+  }
+  s.addNotes(notes('Two tools. Rocks are the few things that must be true in 90 days. Measurable, a clear “done when”, one owner.|To-Dos are seven-day promises. Done by next week, or flagged early.|Both are commitments: to the team, and to yourself.'));
+
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P1 });
+  kicker(s, 'Part 1 · The rhythm');
+  s.addText('Every week, out loud', { placeholder: 'title' });
+  {
+    const gap = 0.45, cw = (CW - 2 * gap) / 3;
+    [['01', 'Set', 'Every Rock gets one owner and a clear “done when.”'],
+     ['02', 'Report', 'Every L10: on track or off track. One word, no stories.'],
+     ['03', 'Resolve', 'Off track goes on the issues list, and we solve it as a team.']].forEach(([n, h, p], i) => {
+      const x = L + i * (cw + gap), y = 3.0;
+      s.addShape(pres.shapes.LINE, { objectName: 'step rule ' + n, x, y, w: cw, h: 0, line: { color: HEX.accent1, width: 1.5 } });
+      tb(s, n, { x, y: y + 0.3, w: cw, h: 0.3, fontSize: 12, bold: true, charSpacing: 2, color: C.accent2 });
+      tb(s, h, { x, y: y + 0.7, w: cw, h: 0.7, fontFace: THEME.headFontFace, fontSize: 32, bold: true, color: C.text1 });
+      tb(s, p, { x, y: y + 1.5, w: cw, h: 1.1, fontSize: 17, color: C.accent3 });
+    });
+  }
+  s.addNotes(notes('This is what makes it real: a weekly rhythm.|Set: every Rock gets one owner and a done-when.|Report: every L10, each owner says on track or off track. One word, no stories.|Resolve: if it’s off track, it goes to the issues list and we solve it together.'));
+
+  s = pres.addSlide({ masterName: 'ACE Statement', sectionTitle: P1 });
+  kicker(s, 'Part 1 · Drive');
+  s.addText([{ text: 'Finish what you ' }, { text: 'give yourself', options: { italic: true, bold: false, color: C.accent1 } }], { placeholder: 'title' });
+  s.addText('Ambition without ownership is noise. Credit goes to the finish, not the intention.', { placeholder: 'body' });
+  s.addNotes(notes('This is the personal one. You’re accountable for the things you give yourself.|Ambition without ownership is noise. Everyone here has had a “we should redo the website” moment. You don’t get credit for the intention. You get credit for the finish.|Which brings us to the website.'));
+
+  // ================= PART 2: THE WEBSITE DESIGNS =================
+  pres.addSection({ title: P2 });
+
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P2 });
+  kicker(s, 'Part 2 · Our first Rock');
   s.addText('Launch the new ACE website', { placeholder: 'title' });
   {
     const y = 2.55;
     [['OWNER', L], ['DONE BY', L + 3.3], ['STATUS', L + 6.4]].forEach(([t, x]) =>
       tb(s, t, { x, y, w: 2.6, h: 0.25, fontSize: 10, bold: true, charSpacing: 3, color: C.accent2 }));
-    tb(s, '', { x: L, y: y + 0.38, w: 2.6, h: 0.42, fontFace: THEME.headFontFace, fontSize: 18, color: C.text1, objectName: 'owner (type your name)' });
+    tb(s, '', { x: L, y: y + 0.38, w: 2.6, h: 0.42, fontFace: THEME.headFontFace, fontSize: 18, color: C.text1, objectName: 'owner (type a name)' });
     hRule(s, L, y + 0.82, 2.6, C.accent4, 'owner line');
     tb(s, 'End of quarter', { x: L + 3.3, y: y + 0.38, w: 2.6, h: 0.42, fontFace: THEME.headFontFace, fontSize: 18, color: C.text1, objectName: 'done by' });
     hRule(s, L + 3.3, y + 0.82, 2.6, C.accent4, 'done by line');
@@ -310,13 +357,10 @@ const HERO_RATIO = 1100 / 644;
       align: 'center', valign: 'middle', margin: 0, fontSize: 15, bold: true, color: '2F6B3A', fill: { color: 'E4EBDD' }, line: { color: 'A9C4A6', width: 0.75 }, objectName: 'status' });
     track(s, 2, 4.35, false);
   }
-  s.addNotes(notes('This is the Rock: one owner, measurable, done by the end of the quarter. Type your name in the Owner line before the meeting.|Four milestones. The first is done: five directions, fully built. The second happens in this room, today.|Every week in our L10 I’ll call it on track or off track. No surprises.'));
+  s.addNotes(notes('Here’s where the two jobs meet. The website is our first Rock, run exactly the way we just described.|Four milestones. The first is already done: five directions, fully built. The second happens in this room, today.|From here on it gets reported in L10 like every other Rock.'));
 
-  // ================= MILESTONE 1: THE DESIGNS =================
-  pres.addSection({ title: 'Milestone 1 · Designs' });
-
-  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: 'Milestone 1 · Designs' });
-  kicker(s, 'Milestone 1 · delivered');
+  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: P2 });
+  kicker(s, 'Part 2 · The designs');
   s.addText([{ text: 'Five directions, built. ' }, { text: 'Two', options: { italic: true, bold: false, color: C.accent1 } }, { text: ' to sit with' }], { placeholder: 'title' });
   {
     const gap = 0.3, tw = (CW - 4 * gap) / 5, th = tw / HERO_RATIO;
@@ -334,16 +378,16 @@ const HERO_RATIO = 1100 / 644;
 
   FEATURED.forEach((k, i) => {
     const c = CONCEPTS[k], letter = 'AB'[i];
-    let sl = pres.addSlide({ masterName: 'ACE Showcase', sectionTitle: 'Milestone 1 · Designs' });
+    let sl = pres.addSlide({ masterName: 'ACE Showcase', sectionTitle: P2 });
     showcase(sl, c, 'Featured ' + letter);
     sl.addNotes(notes(c.notes));
-    sl = pres.addSlide({ masterName: 'ACE Light Bare', sectionTitle: 'Milestone 1 · Designs' });
+    sl = pres.addSlide({ masterName: 'ACE Light Bare', sectionTitle: P2 });
     whySlide(sl, c, letter);
     sl.addNotes(notes('Three reasons it works for ACE, one honest risk.|' + c.why.map(w => w.join('')).join('|') + '|Watch: ' + c.risk));
   });
 
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'Milestone 1 · Designs' });
-  kicker(s, 'Also delivered');
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P2 });
+  kicker(s, 'Part 2 · Also built');
   s.addText('The other three', { placeholder: 'title' });
   {
     const gap = 0.45, cw = (CW - 2 * gap) / 3;
@@ -358,8 +402,8 @@ const HERO_RATIO = 1100 / 644;
   chip(s, M1, false);
   s.addNotes(notes('Not throwaways. Each one is complete and any of them could ship.|If someone in the room is pulling for one of these, say so now and we’ll swap it into the final two.'));
 
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'Milestone 1 · Designs' });
-  kicker(s, 'All five, side by side');
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P2 });
+  kicker(s, 'Part 2 · All five, side by side');
   s.addText('Feeling, audience, watch-outs', { placeholder: 'title' });
   {
     const head = ['DIRECTION', 'FEELING', 'SPEAKS TO', 'WATCH OUT FOR'].map(t => ({
@@ -382,8 +426,8 @@ const HERO_RATIO = 1100 / 644;
   chip(s, M1, false);
   s.addNotes(notes('One line each, so we’re comparing the same things: feeling, who it speaks to, what to watch for.|The watch-out column is where the real conversation is.'));
 
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'Milestone 1 · Designs' });
-  kicker(s, 'Built in, not bolted on');
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P2 });
+  kicker(s, 'Part 2 · Built in, not bolted on');
   s.addText('Every direction books deliveries, in its own colors', { placeholder: 'title' });
   {
     const gap = 0.25, mw = (CW - 4 * gap) / 5, mh = 2.15;
@@ -397,55 +441,30 @@ const HERO_RATIO = 1100 / 644;
   chip(s, M1, false);
   s.addNotes(notes('One slide on this. Whichever direction we choose, the booking matrix already matches it.|It turns a visit into a scheduled delivery window. That’s what makes the site work for ACE, not just look good.'));
 
-  // ================= MILESTONE 2: THE DECISION =================
-  pres.addSection({ title: 'Milestone 2 · Decision' });
+  // ================= PART 3: DECIDE AND COMMIT =================
+  pres.addSection({ title: P3 });
 
-  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: 'Milestone 2 · Decision' });
-  kicker(s, 'Milestone 2 · today');
+  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: P3 });
+  kicker(s, 'Part 3 · Decide');
   s.addText('Which direction do we build?', { placeholder: 'title' });
   {
     const gap = 0.22, cw = (CW - 4 * gap) / 5;
     ORDER.forEach((k, i) => {
       const c = CONCEPTS[k], f = FEATURED.includes(k), x = L + i * (cw + gap), y = 2.65;
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: c.name + ' card', x, y, w: cw, h: 1.2, rectRadius: 0.08,
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: c.name + ' card', x, y, w: cw, h: 1.4, rectRadius: 0.08,
         fill: { color: '2A2116', transparency: f ? 0 : 40 }, line: { color: f ? HEX.accent1 : '3A3226', width: f ? 1.25 : 0.75 } });
       tb(s, c.n, { x: x + 0.2, y: y + 0.18, w: cw - 0.4, h: 0.25, fontSize: 10, bold: true, charSpacing: 2, color: C.accent1 });
       tb(s, c.name, { x: x + 0.2, y: y + 0.45, w: cw - 0.4, h: 0.4, fontFace: THEME.headFontFace, fontSize: 17, bold: true, color: C.background2, fit: 'shrink' });
-      tb(s, c.feel, { x: x + 0.2, y: y + 0.82, w: cw - 0.4, h: 0.3, fontSize: 11, color: '9C9381' });
+      tb(s, c.feel, { x: x + 0.2, y: y + 0.84, w: cw - 0.4, h: 0.42, fontSize: 11, color: '9C9381' });
     });
-    tb(s, 'If we can’t land on one, we land on two, and name who makes the final call by when.', { x: L, y: 4.35, w: 8.2, h: 0.8, fontSize: 18, color: 'BDB4A2' });
+    tb(s, 'If we can’t land on one, we land on two, and name who makes the final call by when.', { x: L, y: 4.5, w: 10.4, h: 0.8, fontSize: 18, color: 'BDB4A2' });
   }
-  chip(s, 'My Rock · milestone 2 of 4 · today', true, true);
-  s.addNotes(notes('Ask it plainly: which direction do we build?|If the room splits, land on two and name who makes the final call by when. That’s a To-Do, not a maybe.'));
+  chip(s, 'Website Rock · milestone 2 of 4 · today', true, true);
+  s.addNotes(notes('Milestone two. Ask it plainly: which direction do we build?|If the room splits, land on two and name who makes the final call by when. That’s a To-Do, not a maybe.'));
 
-  // ================= DRIVING IT TO DONE =================
-  pres.addSection({ title: 'Driving it to done' });
-
-  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: 'Driving it to done' });
-  kicker(s, 'From choosing to finishing');
-  s.addText([{ text: 'If everyone owns it, ' }, { text: 'no one', options: { italic: true, bold: false, color: C.accent1 } }, { text: ' owns it' }], { placeholder: 'title', fontSize: 52 });
-  {
-    const cy = 3.35;
-    ['Everyone', 'The team', 'Someone'].forEach((t, i) => {
-      s.addText(t, { isTextBox: true, x: L + i * 1.75, y: cy, w: 1.55, h: 0.5, align: 'center', valign: 'middle', margin: 0, fontSize: 14, color: '8C826F',
-        shape: pres.shapes.ROUNDED_RECTANGLE, rectRadius: 0.08, line: { color: '5A5142', width: 1, dashType: 'dash' }, objectName: 'vague owner ' + (i + 1) });
-    });
-    tb(s, '→', { x: L + 5.3, y: cy - 0.02, w: 0.6, h: 0.5, fontSize: 26, color: C.accent1, align: 'center' });
-    s.addText('One name: mine', { isTextBox: true, x: L + 6.0, y: cy, w: 2.3, h: 0.5, align: 'center', valign: 'middle', margin: 0, fontSize: 15, bold: true, color: C.text2,
-      shape: pres.shapes.ROUNDED_RECTANGLE, rectRadius: 0.08, fill: { color: C.accent1 }, line: { color: C.accent1, width: 1 }, objectName: 'one owner' });
-    const colW = (CW - 0.8) / 2;
-    [['MY SEAT', 'I own the website Rock: the build, the booking flow, the launch. One name, so nobody wonders who’s driving.'],
-     ['WHAT I NEED FROM YOU', 'Decisions when I ask, content and photos on time, and straight answers in L10 when I’m off track.']].forEach(([h, p], i) => {
-      const x = L + i * (colW + 0.8);
-      tb(s, h, { x, y: 4.75, w: colW, h: 0.3, fontSize: 11, bold: true, charSpacing: 3, color: C.accent1 });
-      tb(s, p, { x, y: 5.15, w: colW, h: 1.2, fontSize: 17, color: 'BDB4A2' });
-    });
-  }
-  s.addNotes(notes('Choosing a direction is milestone two of four. The rest is ownership.|In EOS every seat has one person accountable. The Accountability Chart names who owns which outcome, not who reports to whom. For the website, that’s me.|Accountability isn’t blame. It’s clarity, so nobody has to guess who’s driving.'));
-
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'Driving it to done' });
-  kicker(s, 'Milestones 3 and 4 · my Rocks');
-  s.addText('Three Rocks I’m giving myself', { placeholder: 'title' });
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P3 });
+  kicker(s, 'Part 3 · Commit');
+  s.addText('The website Rocks', { placeholder: 'title' });
   {
     const bd = [{ type: 'none' }, { type: 'none' }, { pt: 0.75, color: HEX.accent4 }, { type: 'none' }];
     const hd = t => ({ text: t, options: { bold: true, fontSize: 10, charSpacing: 2, color: C.accent2, border: bd } });
@@ -455,72 +474,49 @@ const HERO_RATIO = 1100 / 644;
      ['Content & photos approved', 'Services, coverage and contact: written, approved, published.']].forEach(([t, sub]) => {
       rows.push([
         { text: [{ text: t, options: { fontSize: 18, color: C.text1, breakLine: true } }, { text: sub, options: { fontSize: 13, color: C.accent3 } }], options: { border: bd, valign: 'middle' } },
-        { text: 'Me', options: { border: bd, fontFace: THEME.headFontFace, fontSize: 18, color: C.text1, valign: 'middle' } },
+        { text: '', options: { border: bd, fontFace: THEME.headFontFace, fontSize: 18, color: C.text1, valign: 'middle' } },
         { text: '', options: { border: bd, fontFace: THEME.headFontFace, fontSize: 18, color: C.text1, valign: 'middle' } }
       ]);
     });
-    s.addTable(rows, { x: L, y: 2.5, w: CW, colW: [7.4, 1.8, 2.19], rowH: [0.4, 0.95, 0.95, 0.95], margin: [0.06, 0.12, 0.06, 0.0], objectName: 'rocks table' });
+    s.addTable(rows, { x: L, y: 2.5, w: CW, colW: [6.6, 2.6, 2.19], rowH: [0.4, 0.95, 0.95, 0.95], margin: [0.06, 0.12, 0.06, 0.0], objectName: 'rocks table' });
   }
-  s.addNotes(notes('These are my Rocks for the quarter. Few, important, measurable.|Each one has a “done when”, so there’s no arguing later about whether it’s finished.|They’re mine. I’m giving them to myself, in front of you. Fill the due dates before the meeting.'));
+  s.addNotes(notes('Now we do what Part 1 described. Three Rocks for the website, each with a done-when.|One name on each, and a date. Type them in right here, in the room.|From next week, each owner reports on track or off track in L10.'));
 
-  s = pres.addSlide({ masterName: 'ACE Dark', sectionTitle: 'Driving it to done' });
-  kicker(s, 'How I’ll drive it');
-  s.addText('What I say, I do', { placeholder: 'title' });
-  {
-    const colW = CW / 2;
-    hRule(s, L, 2.75, CW, '3A3226', 'top rule');
-    s.addShape(pres.shapes.LINE, { objectName: 'divider', x: L + colW, y: 2.75, w: 0, h: 3.6, line: { color: '3A3226', width: 0.75 } });
-    [['Rocks', '90 DAYS · MINE · ON TRACK OR OFF', ['Reported every week in L10: on track or off track.', 'Off track means I bring the issue, not an excuse.']],
-     ['To-Dos', '7 DAYS · SHORT · SPECIFIC', ['This week’s promises, done in seven days.', 'Or I flag it early. Never quietly late.']]].forEach(([h, m, ps], i) => {
-      const x = L + i * colW + (i ? 0.55 : 0), w = colW - 0.55;
-      tb(s, h, { x, y: 3.15, w, h: 0.8, fontFace: THEME.headFontFace, fontSize: 40, bold: true, color: C.background2 });
-      tb(s, m, { x, y: 4.0, w, h: 0.3, fontSize: 11, bold: true, charSpacing: 3, color: C.accent1 });
-      tb(s, ps.map((p, j) => ({ text: p, options: { breakLine: j < ps.length - 1 } })), { x, y: 4.5, w, h: 1.6, fontSize: 18, color: 'BDB4A2', paraSpaceAfter: 8 });
-    });
-  }
-  s.addNotes(notes('Rocks are the 90-day commitments. I’ll call mine on track or off track every week in L10.|To-Dos are seven-day promises. Done, or flagged early.|Same standard for what I give myself as for what I give the team.'));
-
-  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: 'Driving it to done' });
-  kicker(s, 'After today · To-Dos');
-  s.addText('This week', { placeholder: 'title' });
+  s = pres.addSlide({ masterName: 'ACE Light', sectionTitle: P3 });
+  kicker(s, 'Part 3 · This week');
+  s.addText('This week’s To-Dos', { placeholder: 'title' });
   {
     const bd = [{ type: 'none' }, { type: 'none' }, { pt: 0.75, color: HEX.accent4 }, { type: 'none' }];
     const hd = t => ({ text: t, options: { bold: true, fontSize: 10, charSpacing: 2, color: C.accent2, border: bd } });
     const rows = [[hd('TO-DO'), hd('OWNER'), hd('DUE')]];
-    [['Confirm the chosen direction in writing', 'Me'], ['Kick off the build in that direction', 'Me'],
-     ['Send the content & photo list to the team', 'Me'], ['Get photos & copy back to me', '']].forEach(([t, o]) => {
+    ['Confirm the chosen direction in writing', 'Kick off the build in that direction',
+     'Send the content & photo list to owners', 'Return photos & copy'].forEach(t => {
       rows.push([
         { text: t, options: { fontSize: 17, color: C.text1, border: bd, valign: 'middle' } },
-        { text: o, options: { fontSize: 17, color: C.text1, border: bd, valign: 'middle', fontFace: THEME.headFontFace } },
+        { text: '', options: { fontSize: 17, color: C.text1, border: bd, valign: 'middle', fontFace: THEME.headFontFace } },
         { text: '', options: { fontSize: 17, color: C.text1, border: bd, valign: 'middle' } }
       ]);
     });
-    s.addTable(rows, { x: L, y: 2.5, w: CW, colW: [6.4, 2.8, 2.19], rowH: [0.4, 0.7, 0.7, 0.7, 0.7], margin: [0.06, 0.12, 0.06, 0.0], objectName: 'todo table' });
+    s.addTable(rows, { x: L, y: 2.5, w: CW, colW: [6.6, 2.6, 2.19], rowH: [0.4, 0.7, 0.7, 0.7, 0.7], margin: [0.06, 0.12, 0.06, 0.0], objectName: 'todo table' });
   }
-  s.addNotes(notes('Four To-Dos, seven days.|Three are mine. One is the team’s: photos and copy. Put a name on it before we stand up.'));
+  s.addNotes(notes('Seven-day promises to get the Rocks moving.|Put a name and a date on every line before anyone stands up. Read them back at the end.'));
 
-  s = pres.addSlide({ masterName: 'ACE Statement', sectionTitle: 'Driving it to done' });
-  kicker(s, 'Drive');
-  s.addText([{ text: 'Finish what you ' }, { text: 'gave yourself', options: { italic: true, bold: false, color: C.accent1 } }], { placeholder: 'title' });
-  s.addText('I gave myself this Rock. You’ll hear it called on track or off track every week until it’s live.', { placeholder: 'body' });
-  s.addNotes(notes('This is the personal one. You’re accountable for the things you give yourself.|Ambition without ownership is noise. Everyone in this room has had a “we should redo the website” moment. You don’t get credit for the intention. You get credit for the finish.'));
-
-  s = pres.addSlide({ masterName: 'ACE Title', sectionTitle: 'Driving it to done' });
+  s = pres.addSlide({ masterName: 'ACE Title', sectionTitle: P3 });
   s.addImage({ path: A('deck/assets/ace-logo-gold.png'), x: L, y: 0.85, w: 0.7 * LOGO_RATIO, h: 0.7, altText: 'A.C.E. Distribution', objectName: 'close logo' });
   tb(s, [
     { text: 'Own it.', options: { breakLine: true } },
     { text: 'Finish it.', options: { italic: true, bold: false, color: C.accent1 } }
   ], { x: L, y: 1.95, w: CW, h: 2.2, fontFace: THEME.headFontFace, fontSize: 60, bold: true, color: C.background2, lineSpacingMultiple: 0.95 });
-  tb(s, 'Direction chosen. Rocks set. Next check-in: our L10.', { x: L, y: 4.1, w: 8, h: 0.5, fontSize: 18, color: 'BDB4A2' });
+  tb(s, 'Rocks set. Owners named. Every week in L10, we’ll hear where they stand.', { x: L, y: 4.1, w: 9, h: 0.5, fontSize: 18, color: 'BDB4A2' });
   track(s, 3, 5.0, true, L, 8.6);
-  s.addNotes(notes('Close on the commitment, not the design. Read the To-Do names back.|Then: you’ll hear this Rock’s status every week until it’s live.'));
+  s.addNotes(notes('Close on the commitment, not the design. Read the Rock owners and To-Do names back.|Then: we’ll hear where every Rock stands, every week in L10, until the site is live.'));
 
   // ================= APPENDIX =================
   pres.addSection({ title: 'Appendix' });
 
   s = pres.addSlide({ masterName: 'ACE Statement', sectionTitle: 'Appendix' });
   kicker(s, 'Appendix');
-  s.addText('The alternates, full size', { placeholder: 'title' });
+  s.addText([{ text: 'The alternates,', options: { breakLine: true } }, { text: 'full size' }], { placeholder: 'title' });
   s.addText('Swap any of these into the final two if the room is pulling for it. Each one opens live.', { placeholder: 'body' });
   s.addNotes(notes('Backup slides: a full view of each alternate, in case the room wants to swap one into the final two.'));
 
